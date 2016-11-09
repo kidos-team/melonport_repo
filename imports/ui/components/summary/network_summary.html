@@ -1,0 +1,26 @@
+<template name="network_summary">
+  <div class="buysellads-header center-on-small-only">
+    <br/>
+    <ul>
+      <li class="truncate text-light">Network Summary</li>
+      <li> Status:
+        <a class="truncate green-text text-lighten-2">Connected</a>
+      </li>
+      <li> Network:
+        {{#if isMainNetwork}}
+          <a class="truncate green-text text-lighten-2">{{getNetwork}}</a>
+        {{/if}}
+        {{#if isTestNetwork}}
+          <a class="truncate white-text text-lighten-2">{{getNetwork}}</a>
+        {{/if}}
+      </li>
+      <li> Current Block:
+        {{#if isSynced}}
+          <a class="truncate green-text text-lighten-2">{{latestBlock}}</a>
+        {{else}}
+          <a class="truncate blue-text text-lighten-2">Syncing</a>
+        {{/if}}
+      </li>
+    </ul>
+  </div>
+</template>

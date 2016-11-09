@@ -18,5 +18,18 @@ es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
 ecmascript@0.5.9              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.2.1            # Server-side component of the `meteor shell` command
 
-autopublish@1.0.7             # Publish all data to the clients (for prototyping)
-insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
+# Desgin
+fourseven:scss                # SASS
+poetic:materialize-scss       # Material Design Template
+fortawesome:fontawesome       # Icons and fonts
+
+# User Experience
+kadira:flow-router            # Routing of pages
+kadira:blaze-layout           # Rendering
+
+# Internationalisation
+tap:i18n
+
+check@1.2.3
+underscore@1.0.9
+session@1.1.6

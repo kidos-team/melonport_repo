@@ -1,0 +1,51 @@
+<template name="daemon">
+
+  <!-- Index-banner -->
+  <div class="section light-green darken-2 white-text" id="index-banner">
+    <div class="container">
+      <div class="row center">
+        <div class="col s12 m7 offset-m1 l6 offset-l2">
+          <h1 class="header center-on-small-only grey-text text-lighten-4">Daemon</h1>
+          <h4 class ="center-on-small-only light grey-text text-lighten-5">Blockchain Deamon for Melon</h4>
+        </div>
+        <!-- Users network summary -->
+        <div class="col s12 m2">
+          <!-- Client is connected -->
+          {{#if isConnected}}
+            {{> network_summary}}
+          {{else}}
+            <br/>
+            <span class="text-light">Try use me with</span>
+            <li><a class="white-text" href="https://metamask.io/" target="_blank"><b>MetaMask</b></a></li>
+            <li><a class="white-text" href="https://github.com/ethereum/mist" target="_blank"><b>Mist</b></a></li>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{#if isServerConnected}}
+    <!-- Terms&Conditions -->
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m9 offset-m1 l8 offset-l2">
+          <!-- Terms Accepted -->
+          <h4 class="light">Price Feed</h4>
+        </div>
+      </div>
+    </div>
+
+  {{else}}
+    <!-- Not connected to the node -->
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m9 offset-m1 l8 offset-l2">
+          <div id="results" class="section scrollspy">
+            <h4 class="light">Ethereum node down</h4>
+            <p>Unfortunately the Ethereum node seems to be down. <a href="mailto:team@melonport.com?subject=Ethereum Node Down on Daemon app" target="_top">Please contact us</a>. Thanks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>
