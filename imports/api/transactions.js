@@ -7,7 +7,7 @@ export const Transactions = new Mongo.Collection('transactions');
 if (Meteor.isServer) {
   // This code only runs on the server
   Meteor.publish('transactions', function transactionsPublication() {
-    return Transactions.find();
+    return Transactions.find({}, { sort: { createdAt: -1 } });
   });
 }
 
