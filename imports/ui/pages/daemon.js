@@ -28,7 +28,7 @@ Template.daemon.helpers({
     return {
       collection: Transactions,
       rowsPerPage: 5,
-      showFilter: true,
+      showFilter: false,
       fields: [
         { key: 'createdAt', label: 'Tx Sent to Network At', sortOrder: 0, sortDirection: 'descending' },
         { key: 'prices',  label: '[BTC, USD, EUR]', sortOrder: 1, sortDirection: 'ascending'},

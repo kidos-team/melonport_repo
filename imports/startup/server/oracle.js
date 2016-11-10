@@ -13,30 +13,30 @@ const TOKEN_ADDRESSES = [
   '0x0000000000000000000000000000000000000001',
   '0x0000000000000000000000000000000000000002',
 ];
-
-
 // creation of contract object
 var PriceFeed = web3.eth.contract(ABI);
 var priceFeedInstance = PriceFeed.at(PRICEFEED_ADDRESS);
 
 
-// Only if fully synced
-if (web3.eth.syncing === false) {
-  const filter = web3.eth.filter('latest');
-  filter.watch((error, log) => {
-    const currentBlock = web3.eth.blockNumber;
-    if (currentBlock % 100 === 0) {
+// FUNCTIONS
+// Initialize everything on new network
+function setPrice() {
+  var result = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR');
+  const prices = [result.data['BTC'], result.data['USD'], result.data['EUR']];
+  const txHash = priceFeedInstance.setPrice(TOKEN_ADDRESSES, prices);
 
-      var result = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR');
-      const prices = [result.data['BTC'], result.data['USD'], result.data['EUR']];
-      const txHash = priceFeedInstance.setPrice(TOKEN_ADDRESSES, prices);
-
-      Transactions.insert({
-        addresses: TOKEN_ADDRESSES,
-        prices,
-        txHash,
-        createdAt: new Date(),
-      });
-    }
+  Transactions.insert({
+    addresses: TOKEN_ADDRESSES,
+    prices,
+    txHash,
+    createdAt: new Date(),
   });
+  console.log('setPrice has been called');
 }
+
+
+// EXECUTION
+Meteor.startup(() => {
+  // Set Price in regular time intervals
+  Meteor.setInterval(setPrice, 300000);
+});
