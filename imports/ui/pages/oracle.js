@@ -6,24 +6,17 @@ import { $ } from 'meteor/jquery';
 
 import { Transactions } from '/imports/api/transactions.js';
 
-import './daemon.html';
+import './oracle.html';
 
 
-Template.daemon.onCreated(function daemonOnCreated() {
+Template.oracle.onCreated(function oracleOnCreated() {
   Meteor.subscribe('transactions');
 
-  Session.set('isServerConnected', true);
-  Meteor.call('isServerConnected', (err, result) => {
-    if(!err) {
-      Session.set('isServerConnected', result);
-    } else {
-      console.log(err);
-    }
-  });
+
 });
 
 
-Template.daemon.helpers({
+Template.oracle.helpers({
   'settings'() {
     return {
       collection: Transactions,
@@ -38,9 +31,9 @@ Template.daemon.helpers({
   },
 });
 
-Template.daemon.onRendered(function daemonOnRendered() {
+Template.oracle.onRendered(function oracleOnRendered() {
 });
 
 
-Template.daemon.events({
+Template.oracle.events({
 });

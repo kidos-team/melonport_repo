@@ -1,0 +1,39 @@
+<template name="oracle">
+
+  <!-- Index-banner -->
+  <div class="section light-green darken-2 white-text" id="index-banner">
+    <div class="container">
+      <div class="row center">
+        <div class="col s12 m10 offset-m1 l8 offset-l2">
+          <h1 class="header center-on-small-only grey-text text-lighten-4">Daemon</h1>
+          <h4 class ="center-on-small-only light grey-text text-lighten-5">Blockchain Deamon for Melon</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{#if isServerConnected}}
+    <!-- Oracle -->
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <h4 class="light">Oracle for <a href="https://testnet.etherscan.io/address/0x6871a7fa6ab6048388c35486399259fecb836f37" target="_blank">this</a> Price Feed</h4>
+          {{> reactiveTable settings=settings}}
+        </div>
+      </div>
+    </div>
+
+  {{else}}
+    <!-- Not connected to the node -->
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m9 offset-m1 l8 offset-l2">
+          <div id="results" class="section scrollspy">
+            <h4 class="light">Ethereum node down</h4>
+            <p>Unfortunately the Ethereum node seems to be down. <a href="mailto:team@melonport.com?subject=Ethereum Node Down on Daemon app" target="_top">Please contact us</a>. Thanks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>
