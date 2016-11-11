@@ -7,7 +7,7 @@ import PriceFeedAsset from '/imports/lib/assets/PriceFeed.sol.js';
 
 // CONSTANTS
 const ABI = PriceFeedAsset.all_networks['2'].abi;
-const PRICEFEED_ADDRESS = PriceFeedAsset.all_networks['2'].address;
+const PRICEFEED_ADDRESS = "0x6871A7Fa6AB6048388C35486399259feCB836f37";
 const TOKEN_ADDRESSES = [
   '0x0000000000000000000000000000000000000000',
   '0x0000000000000000000000000000000000000001',
