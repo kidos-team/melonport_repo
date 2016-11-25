@@ -1,5 +1,5 @@
 // Initialize web3 as global object for entire server side
-import web3 from '/imports/lib/server/ethereum/web3.js'
+import web3 from '/imports/lib/server/ethereum/web3.js';
 
 // Set defaultAccount
 web3.eth.defaultAccount = web3.eth.coinbase;
