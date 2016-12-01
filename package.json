@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "bignumber.js": "^3.0.1",
     "meteor-node-stubs": "~0.2.0",
     "web3": "^0.17.0-beta"
   }

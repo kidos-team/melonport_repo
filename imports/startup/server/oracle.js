@@ -1,11 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http'
+import { BigNumber } from 'bignumber.js';
 
 import { Transactions } from '/imports/api/transactions.js';
 import PriceFeedAsset from '/imports/lib/assets/PriceFeed.sol.js';
 
 
-// CONSTANTS
+// Constants
 const ABI = PriceFeedAsset.all_networks['2'].abi;
 const PRICEFEED_ADDRESS = "0x60440640630A03A146C4e38684B2AF0Fd9B32193";
 const TOKEN_ADDRESSES = [
@@ -13,7 +14,9 @@ const TOKEN_ADDRESSES = [
   '0x0000000000000000000000000000000000000001',
   '0x0000000000000000000000000000000000000002',
 ];
-// creation of contract object
+const PREMINED_PRECISION = new BigNumber(Math.pow(10,8));
+
+// Creation of contract object
 var PriceFeed = web3.eth.contract(ABI);
 var priceFeedInstance = PriceFeed.at(PRICEFEED_ADDRESS);
 
