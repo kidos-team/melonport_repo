@@ -22,7 +22,12 @@ var priceFeedInstance = PriceFeed.at(PRICEFEED_ADDRESS);
 // Initialize everything on new network
 function setPrice() {
   var result = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR');
-  const prices = [result.data['BTC'], result.data['USD'], result.data['EUR']];
+  const data = result.data;
+  const prices = [
+    1.0 / data['BTC'] * PREMINED_PRECISION,
+    1.0 / data['USD'] * PREMINED_PRECISION,
+    1.0 / data['EUR'] * PREMINED_PRECISION
+  ];
   const txHash = priceFeedInstance.setPrice(TOKEN_ADDRESSES, prices);
 
   Transactions.insert({

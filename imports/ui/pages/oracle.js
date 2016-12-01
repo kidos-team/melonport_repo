@@ -24,7 +24,7 @@ Template.oracle.helpers({
       showFilter: false,
       fields: [
         { key: 'createdAt', label: 'Tx Sent to Network At', sortOrder: 0, sortDirection: 'descending' },
-        { key: 'prices',  label: '[BTC, USD, EUR]', sortOrder: 1, sortDirection: 'ascending'},
+        { key: 'prices',  label: '[ETH / BTT, ETH / UST, ETH / EUT]', sortOrder: 1, sortDirection: 'ascending'},
         { key: 'txHash',  label: 'Tx Hash', sortOrder: 2, sortDirection: 'ascending'},
       ],
     };
