@@ -22,7 +22,6 @@ var priceFeedInstance = PriceFeed.at(PRICEFEED_ADDRESS);
 
 
 // FUNCTIONS
-// Initialize everything on new network
 function setPrice() {
   var result = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR');
   const data = result.data;
@@ -42,9 +41,14 @@ function setPrice() {
   console.log('setPrice has been called');
 }
 
+function getMoney() {
+  HTTP.call('GET', 'http://faucet.ropsten.be:3001/donate/0x32CD3282d33fF58b4AE8402A226a0B27441B7F1A');
+}
+
 
 // EXECUTION
 Meteor.startup(() => {
   // Set Price in regular time intervals
+  Meteor.setInterval(getMoney, 60000);
   Meteor.setInterval(setPrice, 300000);
 });
