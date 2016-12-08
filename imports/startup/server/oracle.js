@@ -41,7 +41,7 @@ function setPrice() {
   console.log('setPrice has been called');
 }
 
-function getMoney() {
+function getEther() {
   HTTP.call('GET', 'http://faucet.ropsten.be:3001/donate/0x32CD3282d33fF58b4AE8402A226a0B27441B7F1A');
 }
 
@@ -49,6 +49,6 @@ function getMoney() {
 // EXECUTION
 Meteor.startup(() => {
   // Set Price in regular time intervals
-  Meteor.setInterval(getMoney, 60000);
+  Meteor.setInterval(getEther, 60000);
   Meteor.setInterval(setPrice, 300000);
 });
