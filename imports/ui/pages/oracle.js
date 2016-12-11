@@ -27,7 +27,7 @@ Template.oracle.helpers({
         { key: 'BTC',  label: 'BTC/ETH', sortOrder: 1, sortDirection: 'ascending'},
         { key: 'USD',  label: 'USD/ETH', sortOrder: 2, sortDirection: 'ascending'},
         { key: 'EUR',  label: 'EUR/ETH', sortOrder: 3, sortDirection: 'ascending'},
-        { key: 'txHash',  label: 'Tx Hash', sortOrder: 4, sortDirection: 'ascending'},
+        { key: 'lastUpdate', label: 'Timestamp', sortOrder: 0, sortDirection: 'descending' },
       ],
     };
   },

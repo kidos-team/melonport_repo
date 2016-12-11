@@ -17,34 +17,43 @@ import SolConstants from '/imports/lib/assets/lib/SolConstants.js';
 
 
 // Creation of contract object
-const priceFeedContract = web3.eth.contract(PriceFeed.all_networks['3'].abi)
-  .at(PriceFeed.all_networks['3'].address);
+// const priceFeedContract = web3.eth.contract(PriceFeed.all_networks['3'].abi)
+//   .at(PriceFeed.all_networks['3'].address);
+PriceFeed.setProvider(web3.currentProvider);
+const priceFeedContract = PriceFeed.at(PriceFeed.all_networks['3'].address);
+console.log(priceFeedContract.address)
 
 const TOKEN_ADDRESSES = [
-  EtherToken.all_networks['3'].address,
-  PriceFeed.all_networks['3'].address,
-  PriceFeed.all_networks['3'].address,
+  BitcoinToken.all_networks['3'].address,
+  DollarToken.all_networks['3'].address,
+  EuroToken.all_networks['3'].address,
 ];
 
 
 // FUNCTIONS
 function setPrice() {
-  var result = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR');
-  const data = result.data;
+  const data = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR').data;
   const addresses = TOKEN_ADDRESSES;
   const inverseAtomizedPrices = Helpers.createInverseAtomizedPrices(data);
-  const txHash = priceFeedContract.setPrice(addresses, inverseAtomizedPrices);
+  let txHash;
+  let lastUpdate;
 
-  Transactions.insert({
-    addresses: TOKEN_ADDRESSES,
-    BTC: data['BTC'],
-    USD: data['USD'],
-    EUR: data['EUR'],
-    inverseAtomizedPrices,
-    txHash,
-    createdAt: new Date(),
+  priceFeedContract.setPrice(addresses, inverseAtomizedPrices).then((result) => {
+    txHash = result;
+    return priceFeedContract.lastUpdate.call();
+  }).then((result) => {
+    lastUpdate = result.toNumber();
+    return Transactions.insert({
+      addresses: TOKEN_ADDRESSES,
+      BTC: data['BTC'],
+      USD: data['USD'],
+      EUR: data['EUR'],
+      inverseAtomizedPrices,
+      txHash,
+      lastUpdate,
+      createdAt: new Date(),
+    });
   });
-  console.log('setPrice has been called');
 }
 
 function getEther() {
