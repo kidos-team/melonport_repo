@@ -22,7 +22,7 @@ Template.liqidity.helpers({
       showFilter: false,
       fields: [
         { key: 'createdAt', label: 'Tx Sent to Network At', sortOrder: 0, sortDirection: 'descending' },
-        { key: 'prices',  label: '[BTC, USD, EUR]', sortOrder: 1, sortDirection: 'ascending'},
+        { key: 'BTC',  label: 'BTC', key: 'USD',  label: 'USD', key: 'EUR',  label: 'EUR', sortOrder: 1, sortDirection: 'ascending'},
         { key: 'txHash',  label: 'Tx Hash', sortOrder: 2, sortDirection: 'ascending'},
       ],
     };

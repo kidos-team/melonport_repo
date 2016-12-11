@@ -231,13 +231,13 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.new = function() {
     if (this.currentProvider == null) {
-      throw new Error("PriceFeed error: Please call setProvider() first before calling new().");
+      throw new Error("Owned error: Please call setProvider() first before calling new().");
     }
 
     var args = Array.prototype.slice.call(arguments);
 
     if (!this.unlinked_binary) {
-      throw new Error("PriceFeed error: contract binary not set. Can't deploy new instance.");
+      throw new Error("Owned error: contract binary not set. Can't deploy new instance.");
     }
 
     var regex = /__[^_]+_+/g;
@@ -256,7 +256,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         return name != arr[index + 1];
       }).join(", ");
 
-      throw new Error("PriceFeed contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of PriceFeed: " + unlinked_libraries);
+      throw new Error("Owned contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of Owned: " + unlinked_libraries);
     }
 
     var self = this;
@@ -297,7 +297,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.at = function(address) {
     if (address == null || typeof address != "string" || address.length != 42) {
-      throw new Error("Invalid address passed to PriceFeed.at(): " + address);
+      throw new Error("Invalid address passed to Owned.at(): " + address);
     }
 
     var contract_class = this.web3.eth.contract(this.abi);
@@ -308,7 +308,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.deployed = function() {
     if (!this.address) {
-      throw new Error("Cannot find deployed address: PriceFeed not deployed or address not set.");
+      throw new Error("Cannot find deployed address: Owned not deployed or address not set.");
     }
 
     return this.at(this.address);
@@ -347,44 +347,8 @@ var SolidityEvent = require("web3/lib/web3/event.js");
   };
 
   Contract.all_networks = {
-  "2": {
+  "3": {
     "abi": [
-      {
-        "constant": true,
-        "inputs": [
-          {
-            "name": "asset",
-            "type": "address"
-          }
-        ],
-        "name": "getPrice",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "newFee",
-            "type": "uint256"
-          }
-        ],
-        "name": "setFee",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-      },
       {
         "constant": true,
         "inputs": [],
@@ -399,83 +363,14 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "function"
       },
       {
-        "constant": true,
         "inputs": [],
-        "name": "lastUpdate",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
         "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [],
-        "name": "payOut",
-        "outputs": [],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [],
-        "name": "precision",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "fungibles",
-            "type": "address[]"
-          },
-          {
-            "name": "prices",
-            "type": "uint256[]"
-          }
-        ],
-        "name": "setPrice",
-        "outputs": [],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [],
-        "name": "fee",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "name": "ownerInput",
-            "type": "address"
-          }
-        ],
         "type": "constructor"
       }
     ],
-    "unlinked_binary": "0x6060604081905260008054600160a060020a0319166c0100000000000000000000000033810204178155600181905560086002819055600491909155600555602080610382833950608060405251600380546c0100000000000000000000000080840204600160a060020a031990911617905550610301806100816000396000f36060604052361561006c5760e060020a600035046341976e09811461007157806369fe0e2d146100915780638da5cb5b146100ba578063c0463711146100d1578063c2052403146100df578063d3b5dc3b14610102578063d441987d14610110578063ddca3f43146101ac575b610002565b34610002576101ba6004356000600460005054803410156101ea57610002565b34610002576101ba60043560035460009033600160a060020a0390811691161461020757610002565b34610002576101cc600354600160a060020a031681565b34610002576101ba60065481565b34610002576101e860035433600160a060020a0390811691161461021057610002565b34610002576101ba60055481565b3461000257604080516020600480358082013583810280860185019096528085526101e895929460249490939285019282918501908490808284375050604080518735808a013560208181028481018201909552818452989a9960449993985091909101955093508392508501908490808284375094965050505050505060035460009033600160a060020a0390811691161461024657610002565b34610002576101ba60045481565b60408051918252519081900360200190f35b60408051600160a060020a039092168252519081900360200190f35b005b5050600160a060020a031660009081526007602052604090205490565b60049190915590565b604051600160a060020a0333811691309091163180156108fc02916000818181858888f19350505050151561024457610002565b565b82828051825114151561025857610002565b42600655600092505b84518310156102fa5783838151811015610002579060200190602002015160076000506000878681518110156100025790602001906020020151600160a060020a0316815260200190815260200160002060005081905550426008600050600087868151811015610002576020908102909101810151600160a060020a0316825281019190915260400160002055600190920191610261565b505050505056",
+    "unlinked_binary": "0x6060604052346000575b60008054600160a060020a0319166c01000000000000000000000000338102041790555b5b606b8061003b6000396000f3606060405260e060020a60003504638da5cb5b8114601c575b6000565b346000576026604f565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b60005473ffffffffffffffffffffffffffffffffffffffff168156",
     "events": {},
-    "updated_at": 1478732205909,
-    "address": "0x60440640630A03A146C4e38684B2AF0Fd9B32193",
+    "updated_at": 1481459632356,
     "links": {}
   },
   "default": {
@@ -483,55 +378,6 @@ var SolidityEvent = require("web3/lib/web3/event.js");
       {
         "constant": true,
         "inputs": [],
-        "name": "OWNER",
-        "outputs": [
-          {
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [
-          {
-            "name": "asset",
-            "type": "address"
-          }
-        ],
-        "name": "getPrice",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "newFee",
-            "type": "uint256"
-          }
-        ],
-        "name": "setFee",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [],
         "name": "owner",
         "outputs": [
           {
@@ -543,79 +389,14 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "function"
       },
       {
-        "constant": true,
         "inputs": [],
-        "name": "lastUpdate",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
         "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [],
-        "name": "payOut",
-        "outputs": [],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [],
-        "name": "precision",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "fungibles",
-            "type": "address[]"
-          },
-          {
-            "name": "prices",
-            "type": "uint256[]"
-          }
-        ],
-        "name": "setPrice",
-        "outputs": [],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [],
-        "name": "fee",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "type": "function"
-      },
-      {
-        "inputs": [],
         "type": "constructor"
       }
     ],
-    "unlinked_binary": "0x6060604052600080546c0100000000000000000000000033810204600160a060020a031991821681178355600183905560086002819055600380549093169091179091556004919091556005556103238061005a6000396000f3606060405236156100775760e060020a6000350463117803e3811461007c57806341976e091461009357806369fe0e2d146100b35780638da5cb5b146100dc578063c0463711146100f3578063c205240314610101578063d3b5dc3b14610124578063d441987d14610132578063ddca3f43146101ce575b610002565b34610002576101dc600354600160a060020a031681565b34610002576101f860043560006004600050548034101561020c57610002565b34610002576101f860043560035460009033600160a060020a0390811691161461022957610002565b34610002576101dc600054600160a060020a031681565b34610002576101f860065481565b346100025761020a60035433600160a060020a0390811691161461023257610002565b34610002576101f860055481565b34610002576040805160206004803580820135838102808601850190965280855261020a95929460249490939285019282918501908490808284375050604080518735808a013560208181028481018201909552818452989a9960449993985091909101955093508392508501908490808284375094965050505050505060035460009033600160a060020a0390811691161461026857610002565b34610002576101f860045481565b60408051600160a060020a039092168252519081900360200190f35b60408051918252519081900360200190f35b005b5050600160a060020a031660009081526007602052604090205490565b60049190915590565b604051600160a060020a0333811691309091163180156108fc02916000818181858888f19350505050151561026657610002565b565b82828051825114151561027a57610002565b42600655600092505b845183101561031c5783838151811015610002579060200190602002015160076000506000878681518110156100025790602001906020020151600160a060020a0316815260200190815260200160002060005081905550426008600050600087868151811015610002576020908102909101810151600160a060020a0316825281019190915260400160002055600190920191610283565b505050505056",
+    "unlinked_binary": "0x6060604052346000575b60008054600160a060020a0319166c01000000000000000000000000338102041790555b5b606b8061003b6000396000f3606060405260e060020a60003504638da5cb5b8114601c575b6000565b346000576026604f565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b60005473ffffffffffffffffffffffffffffffffffffffff168156",
     "events": {},
-    "updated_at": 1478730045339,
-    "links": {},
-    "address": "0xd7ef003ae6a5728038262a706468b8c13f0fed85"
+    "updated_at": 1481459308030
   }
 };
 
@@ -700,7 +481,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     Contract.links[name] = address;
   };
 
-  Contract.contract_name   = Contract.prototype.contract_name   = "PriceFeed";
+  Contract.contract_name   = Contract.prototype.contract_name   = "Owned";
   Contract.generated_with  = Contract.prototype.generated_with  = "3.2.0";
 
   // Allow people to opt-in to breaking changes now.
@@ -740,6 +521,6 @@ var SolidityEvent = require("web3/lib/web3/event.js");
   } else {
     // There will only be one version of this contract in the browser,
     // and we can use that.
-    window.PriceFeed = Contract;
+    window.Owned = Contract;
   }
 })();

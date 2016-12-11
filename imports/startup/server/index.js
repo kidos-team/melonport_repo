@@ -8,4 +8,4 @@ web3.eth.defaultAccount = web3.eth.coinbase;
 // as an API to the client.
 import '/imports/startup/server/register-apis.js';
 
-import '/imports/startup/server/oracle.js';
+import '/imports/startup/server/daemon.js';
