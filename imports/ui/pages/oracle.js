@@ -4,20 +4,20 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
 import { $ } from 'meteor/jquery';
 
-import { Transactions } from '/imports/api/transactions.js';
+import { PriceFeedTransactions } from '/imports/api/priceFeedTransactions.js';
 
 import './oracle.html';
 
 
 Template.oracle.onCreated(function oracleOnCreated() {
-  Meteor.subscribe('transactions');
+  Meteor.subscribe('priceFeedTransactions');
 });
 
 
 Template.oracle.helpers({
   'settings'() {
     return {
-      collection: Transactions,
+      collection: PriceFeedTransactions,
       rowsPerPage: 5,
       showFilter: false,
       fields: [

@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http'
 import { BigNumber } from 'bignumber.js';
-import { Transactions } from '/imports/api/transactions.js';
+import { PriceFeedTransactions } from '/imports/api/priceFeedTransactions.js';
+import { LiquidityProviderTransactions } from '/imports/api/liquidityProviderTransactions.js';
 
 import EtherToken from '/imports/lib/assets/contracts/EtherToken.sol.js';
 import BitcoinToken from '/imports/lib/assets/contracts/BitcoinToken.sol.js';
@@ -24,6 +25,11 @@ const TOKEN_ADDRESSES = [
 // Creation of contract object
 PriceFeed.setProvider(web3.currentProvider);
 const priceFeedContract = PriceFeed.at(PriceFeed.all_networks['3'].address);
+
+BitcoinToken.setProvider(web3.currentProvider);
+const bitcoinTokenContract = BitcoinToken.at(BitcoinToken.all_networks['3'].address);
+
+
 Exchange.setProvider(web3.currentProvider);
 const exchangeContract = Exchange.at(Exchange.all_networks['3'].address);
 
@@ -43,7 +49,7 @@ function setPrice() {
     console.log(result)
     const lastUpdate = result.toNumber();
     console.log('Last update: ', lastUpdate)
-    Transactions.insert({
+    PriceFeedTransactions.insert({
       addresses: TOKEN_ADDRESSES,
       BTC: data['BTC'],
       USD: data['USD'],
@@ -57,6 +63,26 @@ function setPrice() {
   });
 };
 
+function createOrderBook() {
+  const data = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR').data;
+
+  let testCases = [];
+  for (let i = 0; i < NUM_OFFERS; i += 1) {
+    testCases.push(
+      {
+        sell_how_much: Helpers.createAtomizedPrices(data)[0] * (1 - (i * 0.1)),
+        sell_which_token: bitcoinTokenContract.address,
+        buy_how_much: 1 * SolKeywords.ether,
+        buy_which_token: etherTokenContract.address,
+        id: i + 1,
+        owner: OWNER,
+        active: true,
+      },
+    );
+  }
+
+}
+
 function getEther() {
   HTTP.call('GET', 'http://faucet.ropsten.be:3001/donate/0x32CD3282d33fF58b4AE8402A226a0B27441B7F1A');
 };
@@ -65,7 +91,12 @@ function getEther() {
 // EXECUTION
 Meteor.startup(() => {
   // Set Price in regular time intervals
-  setPrice();
+  bitcoinTokenContract.approve(contract.address, ALLOWANCE_AMOUNT, { from: OWNER },
+  ).then(() => bitcoinTokenContract.allowance(OWNER, contract.address),
+  ).then((result) => {
+    assert.equal(result, ALLOWANCE_AMOUNT);
+    done();
+  });
   Meteor.setInterval(getEther, 5 * 60 * 1000);
   Meteor.setInterval(setPrice, 10 * 60 * 1000);
 });
