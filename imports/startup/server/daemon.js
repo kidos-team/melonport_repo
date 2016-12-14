@@ -15,25 +15,17 @@ import SolKeywords from '/imports/lib/assets/lib/SolKeywords.js';
 import SolConstants from '/imports/lib/assets/lib/SolConstants.js';
 
 
-// Creation of contract object
-const etherTokenContract = web3.eth.contract(EtherToken.all_networks['3'].abi).
-  at(EtherToken.all_networks['3'].address);
-const bitcoinTokenContract = web3.eth.contract(BitcoinToken.all_networks['3'].abi)
-  .at(BitcoinToken.all_networks['3'].address);
-const dollarTokenContract = web3.eth.contract(DollarToken.all_networks['3'].abi)
-  .at(DollarToken.all_networks['3'].address);
-const euroTokenContract = web3.eth.contract(EuroToken.all_networks['3'].abi)
-  .at(EuroToken.all_networks['3'].address);
-const priceFeedContract = web3.eth.contract(PriceFeed.all_networks['3'].abi)
-  .at(PriceFeed.all_networks['3'].address);
-const exchangeContract = web3.eth.contract(Exchange.all_networks['3'].abi)
-  .at(Exchange.all_networks['3'].address);
-
 const TOKEN_ADDRESSES = [
-  bitcoinTokenContract.address,
-  dollarTokenContract.address,
-  euroTokenContract.address,
+  BitcoinToken.all_networks['3'].address,
+  DollarToken.all_networks['3'].address,
+  EuroToken.all_networks['3'].address,
 ];
+
+// Creation of contract object
+PriceFeed.setProvider(web3.currentProvider);
+const priceFeedContract = PriceFeed.at(PriceFeed.all_networks['3'].address);
+Exchange.setProvider(web3.currentProvider);
+const exchangeContract = Exchange.at(Exchange.all_networks['3'].address);
 
 
 // FUNCTIONS
@@ -43,21 +35,25 @@ function setPrice() {
   const inverseAtomizedPrices = Helpers.createInverseAtomizedPrices(data);
 
   console.log('Data: ', data);
-  const txHash = priceFeedContract.setPrice(addresses, inverseAtomizedPrices, { gas: 4000000, gasPrice: 200000000000 });
-  // const lastUpdate = priceFeedContract.lastUpdate.call();
-  // const lastUpdate = -1;
-
-  // console.log('Last update: ', lastUpdate.toNumber())
-  Transactions.insert({
-    addresses: TOKEN_ADDRESSES,
-    BTC: data['BTC'],
-    USD: data['USD'],
-    EUR: data['EUR'],
-    inverseAtomizedPrices,
-    txHash,
-    
-    // lastUpdate: lastUpdate.toNumber(),
-    createdAt: new Date(),
+  const txHash = priceFeedContract.setPrice(addresses, inverseAtomizedPrices)
+  .then((result) => {
+    return priceFeedContract.lastUpdate();
+  })
+  .then((result) => {
+    console.log(result)
+    const lastUpdate = result.toNumber();
+    console.log('Last update: ', lastUpdate)
+    Transactions.insert({
+      addresses: TOKEN_ADDRESSES,
+      BTC: data['BTC'],
+      USD: data['USD'],
+      EUR: data['EUR'],
+      inverseAtomizedPrices,
+      txHash,
+      lastUpdate: lastUpdate,
+      createdAt: new Date(),
+    });
+    done();
   });
 };
 
