@@ -5,38 +5,26 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import '../../ui/layouts/main.js';
 import '../../ui/layouts/header.js';
 import '../../ui/layouts/footer.js';
-import '../../ui/pages/oracle.js';
-import '../../ui/pages/liquidity.js';
+import '../../ui/pages/data.js';
 
 // Default route
 FlowRouter.route('/', {
-  name: 'oracle',
+  name: 'data',
   action() {
     BlazeLayout.render('layout_main', {
       nav: 'layout_header',
-      main: 'oracle',
+      main: 'data',
       footer: 'layout_footer',
     });
   },
 });
 
-FlowRouter.route('/oracle', {
-  name: 'oracle',
+FlowRouter.route('/data', {
+  name: 'data',
   action() {
     BlazeLayout.render('layout_main', {
       nav: 'layout_header',
-      main: 'oracle',
-      footer: 'layout_footer',
-    });
-  },
-});
-
-FlowRouter.route('/liquidity', {
-  name: 'liquidity',
-  action() {
-    BlazeLayout.render('layout_main', {
-      nav: 'layout_header',
-      main: 'liquidity',
+      main: 'data',
       footer: 'layout_footer',
     });
   },

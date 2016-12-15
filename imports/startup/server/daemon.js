@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http'
-import { BigNumber } from 'bignumber.js';
+import async from 'async';
+
 import { PriceFeedTransactions } from '/imports/api/priceFeedTransactions.js';
 import { LiquidityProviderTransactions } from '/imports/api/liquidityProviderTransactions.js';
 
@@ -22,17 +23,21 @@ const TOKEN_ADDRESSES = [
   EuroToken.all_networks['3'].address,
 ];
 
+const NUM_OFFERS = 3;
+const OWNER = web3.eth.coinbase;
+
 // Creation of contract object
 PriceFeed.setProvider(web3.currentProvider);
 const priceFeedContract = PriceFeed.at(PriceFeed.all_networks['3'].address);
 
+EtherToken.setProvider(web3.currentProvider);
+const etherTokenContract = EtherToken.at(EtherToken.all_networks['3'].address);
 BitcoinToken.setProvider(web3.currentProvider);
 const bitcoinTokenContract = BitcoinToken.at(BitcoinToken.all_networks['3'].address);
-
-
 Exchange.setProvider(web3.currentProvider);
 const exchangeContract = Exchange.at(Exchange.all_networks['3'].address);
 
+console.log(exchangeContract.address)
 
 // FUNCTIONS
 function setPrice() {
@@ -81,6 +86,53 @@ function createOrderBook() {
     );
   }
 
+  console.log(testCases)
+
+  let txHash;
+  async.mapSeries(
+    testCases,
+    (testCase, callbackMap) => {
+      console.log(testCase)
+
+      bitcoinTokenContract.approve(exchangeContract.address, testCase.sell_how_much, { from: OWNER })
+        .then(() => bitcoinTokenContract.allowance(OWNER, exchangeContract.address))
+        .then((result) => {
+          return exchangeContract.offer(
+          testCase.sell_how_much,
+          testCase.sell_which_token,
+          testCase.buy_how_much,
+          testCase.buy_which_token,
+          { from: OWNER });
+        })
+        .then((txHash) => {
+          txHash = txHash;
+          Object.assign({ txHash }, testCase);
+          console.log('Tx hash: ', txHash)
+          return exchangeContract.lastOfferId({ from: OWNER });
+        })
+        .then((lastOfferId) => {
+          LiquidityProviderTransactions.insert({
+            sell_how_much: testCase.sell_how_much,
+            sell_which_token: testCase.sell_which_token,
+            buy_which_token: testCase.buy_which_token,
+            buy_how_much: testCase.buy_how_much,
+            owner: OWNER,
+            active: testCase.active,
+            id: lastOfferId.toNumber(),
+            txHash,
+            createdAt: new Date(),
+          });
+          callbackMap(null, testCase);
+        });
+    },
+    (err, results) => {
+      testCases = results;
+      done();
+    },
+  );
+
+
+
 }
 
 function getEther() {
@@ -91,12 +143,7 @@ function getEther() {
 // EXECUTION
 Meteor.startup(() => {
   // Set Price in regular time intervals
-  bitcoinTokenContract.approve(contract.address, ALLOWANCE_AMOUNT, { from: OWNER },
-  ).then(() => bitcoinTokenContract.allowance(OWNER, contract.address),
-  ).then((result) => {
-    assert.equal(result, ALLOWANCE_AMOUNT);
-    done();
-  });
-  Meteor.setInterval(getEther, 5 * 60 * 1000);
+  Meteor.setInterval(getEther, 2 * 60 * 1000);
   Meteor.setInterval(setPrice, 10 * 60 * 1000);
+  Meteor.setInterval(createOrderBook, 60 * 60 * 1000);
 });

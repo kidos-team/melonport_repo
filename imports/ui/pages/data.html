@@ -1,4 +1,4 @@
-<template name="liqidity">
+<template name="data">
 
   <!-- Index-banner -->
   <div class="section light-green darken-2 white-text" id="index-banner">
@@ -13,12 +13,22 @@
   </div>
 
   {{#if isServerConnected}}
+    <!-- Oracle -->
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <h4 class="light">Oracle for <a href="https://testnet.etherscan.io/address/{{priceFeedContractAddress}}" target="_blank">this Price Feed</a></h4>
+          {{> reactiveTable settings=oracle}}
+        </div>
+      </div>
+    </div>
+
     <!-- Liquidity Provider -->
     <div class="container">
       <div class="row">
         <div class="col s12">
-          <h4 class="light">Liquidity Provider</h4>
-          {{> reactiveTable settings=settings}}
+          <h4 class="light">Liquidity Provider for <a href="https://testnet.etherscan.io/address/{{exchangeContractAddress}}" target="_blank">this Exchange</a></h4>
+          {{> reactiveTable settings=liquidityProvider}}
         </div>
       </div>
     </div>
