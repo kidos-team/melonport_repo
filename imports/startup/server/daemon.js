@@ -130,9 +130,6 @@ function createOrderBook() {
       done();
     },
   );
-
-
-
 }
 
 function getEther() {
