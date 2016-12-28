@@ -231,13 +231,13 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.new = function() {
     if (this.currentProvider == null) {
-      throw new Error("KYMProtocol error: Please call setProvider() first before calling new().");
+      throw new Error("CoreProtocol error: Please call setProvider() first before calling new().");
     }
 
     var args = Array.prototype.slice.call(arguments);
 
     if (!this.unlinked_binary) {
-      throw new Error("KYMProtocol error: contract binary not set. Can't deploy new instance.");
+      throw new Error("CoreProtocol error: contract binary not set. Can't deploy new instance.");
     }
 
     var regex = /__[^_]+_+/g;
@@ -256,7 +256,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         return name != arr[index + 1];
       }).join(", ");
 
-      throw new Error("KYMProtocol contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of KYMProtocol: " + unlinked_libraries);
+      throw new Error("CoreProtocol contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of CoreProtocol: " + unlinked_libraries);
     }
 
     var self = this;
@@ -297,7 +297,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.at = function(address) {
     if (address == null || typeof address != "string" || address.length != 42) {
-      throw new Error("Invalid address passed to KYMProtocol.at(): " + address);
+      throw new Error("Invalid address passed to CoreProtocol.at(): " + address);
     }
 
     var contract_class = this.web3.eth.contract(this.abi);
@@ -308,7 +308,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.deployed = function() {
     if (!this.address) {
-      throw new Error("Cannot find deployed address: KYMProtocol not deployed or address not set.");
+      throw new Error("Cannot find deployed address: CoreProtocol not deployed or address not set.");
     }
 
     return this.at(this.address);
@@ -348,17 +348,45 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.all_networks = {
   "3": {
-    "abi": [],
-    "unlinked_binary": "0x6060604052346000575b60098060156000396000f360606040525b600056",
+    "abi": [
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "getRegistrarAddress",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      }
+    ],
+    "unlinked_binary": "0x6060604052346000575b6055806100166000396000f3606060405260e060020a6000350463d5ab09808114601c575b6000565b346000576026604f565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b60005b9056",
     "events": {},
-    "updated_at": 1482950686660,
+    "updated_at": 1482950686610,
     "links": {}
   },
   "default": {
-    "abi": [],
-    "unlinked_binary": "0x6060604052346000575b60098060156000396000f360606040525b600056",
+    "abi": [
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "getRegistrarAddress",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      }
+    ],
+    "unlinked_binary": "0x6060604052346000575b6055806100166000396000f3606060405260e060020a6000350463d5ab09808114601c575b6000565b346000576026604f565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b60005b9056",
     "events": {},
-    "updated_at": 1482950498498
+    "updated_at": 1482950498489
   }
 };
 
@@ -443,7 +471,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     Contract.links[name] = address;
   };
 
-  Contract.contract_name   = Contract.prototype.contract_name   = "KYMProtocol";
+  Contract.contract_name   = Contract.prototype.contract_name   = "CoreProtocol";
   Contract.generated_with  = Contract.prototype.generated_with  = "3.2.0";
 
   // Allow people to opt-in to breaking changes now.
@@ -483,6 +511,6 @@ var SolidityEvent = require("web3/lib/web3/event.js");
   } else {
     // There will only be one version of this contract in the browser,
     // and we can use that.
-    window.KYMProtocol = Contract;
+    window.CoreProtocol = Contract;
   }
 })();
