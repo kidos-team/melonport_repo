@@ -365,7 +365,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052346000575b6055806100166000396000f3606060405260e060020a6000350463d5ab09808114601c575b6000565b346000576026604f565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b60005b9056",
     "events": {},
-    "updated_at": 1482950686610,
+    "updated_at": 1483030367618,
     "links": {}
   },
   "default": {
@@ -386,7 +386,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052346000575b6055806100166000396000f3606060405260e060020a6000350463d5ab09808114601c575b6000565b346000576026604f565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b60005b9056",
     "events": {},
-    "updated_at": 1482950498489
+    "updated_at": 1483030099522
   }
 };
 
