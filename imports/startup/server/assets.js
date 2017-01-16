@@ -44,7 +44,7 @@ function updateAssets() {
     let priceFeedAddress;
     let priceFeedPrecision;
     let currentPrice;
-    let exchangeAddress;
+    let lastUpdate;
     registrarContract.assetAt(index).then((result) => {
       assetAddress = result;
       assetContract = PreminedAsset.at(assetAddress);
@@ -74,19 +74,20 @@ function updateAssets() {
     .then((result) => {
       currentPrice = result.toNumber();
       console.log(`\n Current Price: ${currentPrice}`)
-      return registrarContract.exchangesAt(index);
+      return priceFeedContract.lastUpdate();
     })
     .then((result) => {
-      exchangeAddress = result;
+      lastUpdate = result.toNumber();
       Assets.upsert({ assetAddress }, { $set: {
         address: assetAddress,
         name: assetName,
         symbol: assetSymbol,
         precision: assetPrecision,
-        priceFeeds: {
+        priceFeed: {
           address: priceFeedAddress,
           precision: priceFeedPrecision,
-          price: currentPrice
+          price: currentPrice,
+          timestamp: lastUpdate
         },
         createdAt: new Date(),
       } });

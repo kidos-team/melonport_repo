@@ -22,32 +22,30 @@
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Status</th>
                 <th>Timestamp</th>
                 <th>Price</th>
-                <th>% Change (24h)</th>
+                <!-- <th>% Change (24h)</th> -->
               </tr>
             </thead>
             <tbody>
-            {{#each getRegistrarOfThisPortfolioManager}}
+            {{#each assets}}
               <tr>
                 <td>
                   <a href="http://testnet.etherscan.io/address/{{assets.address}}" target="_blank">
-                    {{assets.name}}
+                    {{this.name}}
+                    ({{this.symbol}})
                   </a>
                 </td>
-                <td>{{assets.symbol}}</td>
-                <td>{{assets.precision}}</td>
+                <td>{{getStatus this.priceFeed.timestamp}}</td>
+                <td>{{timeConverter this.priceFeed.timestamp}}</td>
                 <td>
                   <a href="http://testnet.etherscan.io/address/{{priceFeeds.address}}" target="_blank">
-                    {{> dapp_identicon identity=priceFeeds.address class="dapp-small"}}
+                    {{formatPrice}}
+                    ETH/{{this.symbol}}
                   </a>
                 </td>
-                <td>{{priceFeeds.precision}}</td>
-                <td>
-                  <a href="http://testnet.etherscan.io/address/{{exchanges.address}}" target="_blank">
-                    {{> dapp_identicon identity=exchanges.address class="dapp-small"}}
-                  </a>
-                </td>
+                <!-- <td>N/A</td> -->
               </tr>
             {{/each}}
             </tbody>

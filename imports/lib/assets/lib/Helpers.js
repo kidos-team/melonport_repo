@@ -4,9 +4,9 @@ var SolConstants = require('./SolConstants.js');
 
 exports.createAtomizedPrices = function(data) {
   return [
-    data['BTC'] * SolConstants.BITCOINTOKEN_ATOMIZE,
-    data['USD'] * SolConstants.DOLLARTOKEN_ATOMIZE,
-    data['EUR'] * SolConstants.EUROTOKEN_ATOMIZE
+    data[0] * SolConstants.BITCOINTOKEN_ATOMIZE,
+    data[1] * SolConstants.DOLLARTOKEN_ATOMIZE,
+    data[2] * SolConstants.EUROTOKEN_ATOMIZE
   ];
 };
 
@@ -18,8 +18,8 @@ exports.createAtomizedPrices = function(data) {
  */
 exports.createInverseAtomizedPrices = function(data) {
   return [
-    1.0 / data['BTC'] * SolConstants.BITCOINTOKEN_OUTSTANDING_PRECISION,
-    1.0 / data['USD'] * SolConstants.DOLLARTOKEN_OUTSTANDING_PRECISION,
-    1.0 / data['EUR'] * SolConstants.EUROTOKEN_OUTSTANDING_PRECISION
+    1.0 / data[0] * SolConstants.BITCOINTOKEN_OUTSTANDING_PRECISION,
+    1.0 / data[1] * SolConstants.DOLLARTOKEN_OUTSTANDING_PRECISION,
+    1.0 / data[2] * SolConstants.EUROTOKEN_OUTSTANDING_PRECISION
   ];
 };

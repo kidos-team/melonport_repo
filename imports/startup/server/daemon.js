@@ -39,24 +39,31 @@ const exchangeContract = Exchange.at(Exchange.all_networks['3'].address);
 
 // FUNCTIONS
 function setPrice() {
-  const data = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR').data;
-  const addresses = TOKEN_ADDRESSES;
-  const inverseAtomizedPrices = Helpers.createInverseAtomizedPrices(data);
+  const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,ETHEUR,ETHUSD').data;
 
-  console.log('Data: ', data);
+
+  const addresses = TOKEN_ADDRESSES;
+  const inverseAtomizedPrices = Helpers.createInverseAtomizedPrices(
+   [
+     //TODO fix precision
+     data.result.XETHXXBT.c[0] * 100,
+     data.result.XETHZUSD.c[0],
+     data.result.XETHZEUR.c[0]
+   ]);
+   console.log(inverseAtomizedPrices)
+
   const txHash = priceFeedContract.setPrice(addresses, inverseAtomizedPrices)
   .then((result) => {
     return priceFeedContract.lastUpdate();
   })
   .then((result) => {
-    console.log(result)
     const lastUpdate = result.toNumber();
-    console.log('Last update: ', lastUpdate)
+
     PriceFeedTransactions.insert({
       addresses: TOKEN_ADDRESSES,
-      BTC: data['BTC'],
-      USD: data['USD'],
-      EUR: data['EUR'],
+      BTC: data.result.XETHXXBT.c[0],
+      USD: data.result.XETHZUSD.c[0],
+      EUR: data.result.XETHZEUR.c[0],
       inverseAtomizedPrices,
       txHash,
       lastUpdate: lastUpdate,
@@ -137,8 +144,9 @@ function getEther() {
 
 // EXECUTION
 Meteor.startup(() => {
+  setPrice()
   // Set Price in regular time intervals
-  // Meteor.setInterval(getEther, 2 * 60 * 1000);
-  // Meteor.setInterval(setPrice, 10 * 60 * 1000);
-  // Meteor.setInterval(createOrderBook, 60 * 60 * 1000);
+  Meteor.setInterval(getEther, 2 * 60 * 1000);
+  Meteor.setInterval(setPrice, 10 * 60 * 1000);
+  Meteor.setInterval(createOrderBook, 60 * 60 * 1000);
 });

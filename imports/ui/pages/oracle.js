@@ -3,33 +3,47 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
 import { $ } from 'meteor/jquery';
+import { BigNumber } from 'web3';
 
-import { PriceFeedTransactions } from '/imports/api/priceFeedTransactions.js';
-import { LiquidityProviderTransactions } from '/imports/api/liquidityProviderTransactions.js';
+import { Assets } from '/imports/api/assets.js';
 
 import './oracle.html';
 
 
 Template.oracle.onCreated(() => {
-  Meteor.subscribe('priceFeedTransactions');
+  Meteor.subscribe('assets');
   Meteor.subscribe('liquidityProviderTransactions');
 });
 
 
 Template.oracle.helpers({
-  'oracle'() {
-    return {
-      collection: PriceFeedTransactions,
-      rowsPerPage: 5,
-      showFilter: false,
-      fields: [
-        { key: 'createdAt', label: 'Tx Sent to Network At', sortOrder: 0, sortDirection: 'descending' },
-        { key: 'BTC',  label: 'BTC/ETH', sortOrder: 1, sortDirection: 'ascending'},
-        { key: 'USD',  label: 'USD/ETH', sortOrder: 2, sortDirection: 'ascending'},
-        { key: 'EUR',  label: 'EUR/ETH', sortOrder: 3, sortDirection: 'ascending'},
-        { key: 'lastUpdate', label: 'Contract Timestamp', sortOrder: 0, sortDirection: 'descending' },
-      ],
-    };
+  'assets'() {
+    return Assets.find({}, { sort: { createdAt: -1 } });
+  },
+  'formatPrice'() {
+    const precision = this.precision;
+    const divisor = Math.pow(10, precision);
+    const price = this.priceFeed.price / divisor
+    return price;
+  },
+  getStatus(UNIX_timestamp) {
+    const now = new Date();
+    const now_seconds = now / 1000;
+    if (now_seconds - UNIX_timestamp > 5*60)
+      return 'Delayed';
+    return 'Current';
+  },
+  timeConverter(UNIX_timestamp) {
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
   },
 });
 
