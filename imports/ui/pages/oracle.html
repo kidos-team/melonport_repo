@@ -18,7 +18,40 @@
       <div class="row">
         <div class="col s12">
           <h4 class="light">Oracle for <a href="https://testnet.etherscan.io/address/{{priceFeedContractAddress}}" target="_blank">this Price Feed</a></h4>
-          {{> reactiveTable settings=oracle}}
+          <table class="highlight centered responsive-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Timestamp</th>
+                <th>Price</th>
+                <th>% Change (24h)</th>
+              </tr>
+            </thead>
+            <tbody>
+            {{#each getRegistrarOfThisPortfolioManager}}
+              <tr>
+                <td>
+                  <a href="http://testnet.etherscan.io/address/{{assets.address}}" target="_blank">
+                    {{assets.name}}
+                  </a>
+                </td>
+                <td>{{assets.symbol}}</td>
+                <td>{{assets.precision}}</td>
+                <td>
+                  <a href="http://testnet.etherscan.io/address/{{priceFeeds.address}}" target="_blank">
+                    {{> dapp_identicon identity=priceFeeds.address class="dapp-small"}}
+                  </a>
+                </td>
+                <td>{{priceFeeds.precision}}</td>
+                <td>
+                  <a href="http://testnet.etherscan.io/address/{{exchanges.address}}" target="_blank">
+                    {{> dapp_identicon identity=exchanges.address class="dapp-small"}}
+                  </a>
+                </td>
+              </tr>
+            {{/each}}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

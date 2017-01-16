@@ -9,3 +9,5 @@ web3.eth.defaultAccount = web3.eth.coinbase;
 import '/imports/startup/server/register-apis.js';
 
 import '/imports/startup/server/daemon.js';
+
+import '/imports/startup/server/assets.js';

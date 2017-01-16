@@ -37,8 +37,6 @@ const bitcoinTokenContract = BitcoinToken.at(BitcoinToken.all_networks['3'].addr
 Exchange.setProvider(web3.currentProvider);
 const exchangeContract = Exchange.at(Exchange.all_networks['3'].address);
 
-console.log(exchangeContract.address)
-
 // FUNCTIONS
 function setPrice() {
   const data = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR').data;
@@ -140,7 +138,7 @@ function getEther() {
 // EXECUTION
 Meteor.startup(() => {
   // Set Price in regular time intervals
-  Meteor.setInterval(getEther, 2 * 60 * 1000);
-  Meteor.setInterval(setPrice, 10 * 60 * 1000);
-  Meteor.setInterval(createOrderBook, 60 * 60 * 1000);
+  // Meteor.setInterval(getEther, 2 * 60 * 1000);
+  // Meteor.setInterval(setPrice, 10 * 60 * 1000);
+  // Meteor.setInterval(createOrderBook, 60 * 60 * 1000);
 });
