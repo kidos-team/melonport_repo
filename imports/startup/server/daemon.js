@@ -40,8 +40,6 @@ const exchangeContract = Exchange.at(Exchange.all_networks['3'].address);
 // FUNCTIONS
 function setPrice() {
   const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,ETHEUR,ETHUSD').data;
-
-
   const addresses = TOKEN_ADDRESSES;
   const inverseAtomizedPrices = Helpers.createInverseAtomizedPrices(
    [
@@ -50,7 +48,6 @@ function setPrice() {
      data.result.XETHZUSD.c[0],
      data.result.XETHZEUR.c[0]
    ]);
-   console.log(inverseAtomizedPrices)
 
   const txHash = priceFeedContract.setPrice(addresses, inverseAtomizedPrices)
   .then((result) => {
@@ -92,14 +89,10 @@ function createOrderBook() {
     );
   }
 
-  console.log(testCases)
-
   let txHash;
   async.mapSeries(
     testCases,
     (testCase, callbackMap) => {
-      console.log(testCase)
-
       bitcoinTokenContract.approve(exchangeContract.address, testCase.sell_how_much, { from: OWNER })
         .then(() => bitcoinTokenContract.allowance(OWNER, exchangeContract.address))
         .then((result) => {
@@ -113,7 +106,6 @@ function createOrderBook() {
         .then((txHash) => {
           txHash = txHash;
           Object.assign({ txHash }, testCase);
-          console.log('Tx hash: ', txHash)
           return exchangeContract.lastOfferId({ from: OWNER });
         })
         .then((lastOfferId) => {
@@ -138,6 +130,36 @@ function createOrderBook() {
   );
 }
 
+function deleteAllOrders() {
+  exchangeContract.lastOfferId()
+  .then((result) => {
+    const numOrders = result.toNumber();
+    for (let index = 0; index < numOrders; index += 1) {
+      exchangeContract.offers(index)
+      .then((result) => {
+        // console.log(result)
+        const [sellHowMuch, sellWhichTokenAddress, buyHowMuch, buyWhichTokenAddress, owner, active] = result;
+        let cancelTxHash;
+        if (active == true) {
+          exchangeContract.cancel(index, { from: OWNER })
+          .then((result) => {
+            cancelTxHash = result;
+            return exchangeContract.offers(index);
+          })
+          .then((result) => {
+            const [sellHowMuch, sellWhichTokenAddress, buyHowMuch, buyWhichTokenAddress, owner, active] = result;
+            LiquidityProviderTransactions.upsert({ id: index }, { $set: {
+              active: active,
+              txHash: cancelTxHash,
+              createdAt: new Date(),
+            } });
+          });
+        }
+      })
+    }
+  });
+}
+
 function getEther() {
   HTTP.call('GET', 'http://faucet.ropsten.be:3001/donate/0xeaa1f63e60982c33868c8910EA4cd1cfB8eB9dcc');
 };
@@ -149,5 +171,7 @@ Meteor.startup(() => {
   // Set Price in regular time intervals
   Meteor.setInterval(getEther, 2 * 60 * 1000);
   Meteor.setInterval(setPrice, 10 * 60 * 1000);
+  //TODO first delete existing orders then create new ones
   Meteor.setInterval(createOrderBook, 60 * 60 * 1000);
+  Meteor.setInterval(deleteAllOrders, 60 * 60 * 1000);
 });

@@ -24,7 +24,7 @@ let numAssignedAssets;
 registrarContract.numAssignedAssets()
   .then((result) => {
     numAssignedAssets = result.toNumber();
-    console.log(`\n Num to Registar assigned assets: ${numAssignedAssets}`)
+    // console.log(`\n Num to Registar assigned assets: ${numAssignedAssets}`)
 
     // Inital updateAssets
     updateAssets();
@@ -73,7 +73,7 @@ function updateAssets() {
     })
     .then((result) => {
       currentPrice = result.toNumber();
-      console.log(`\n Current Price: ${currentPrice}`)
+      // console.log(`\n Current Price: ${currentPrice}`)
       return priceFeedContract.lastUpdate();
     })
     .then((result) => {
@@ -98,5 +98,6 @@ function updateAssets() {
 // EXECUTION
 Meteor.startup(() => {
   // Set Price in regular time intervals
+  updateAssets();
   Meteor.setInterval(updateAssets, 10 * 60 * 1000);
 });
