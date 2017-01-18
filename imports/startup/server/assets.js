@@ -98,5 +98,5 @@ function updateAssets() {
 // EXECUTION
 Meteor.startup(() => {
   // Set Price in regular time intervals
-  // Meteor.setInterval(updateAssets, 2 * 60 * 1000);
+  Meteor.setInterval(updateAssets, 10 * 60 * 1000);
 });

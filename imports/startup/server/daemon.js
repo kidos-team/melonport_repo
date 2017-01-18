@@ -45,7 +45,7 @@ function setPrice() {
   const addresses = TOKEN_ADDRESSES;
   const inverseAtomizedPrices = Helpers.createInverseAtomizedPrices(
    [
-     //TODO fix precision
+     //TODO fix btcs precision
      data.result.XETHXXBT.c[0] * 100,
      data.result.XETHZUSD.c[0],
      data.result.XETHZEUR.c[0]
@@ -74,13 +74,14 @@ function setPrice() {
 };
 
 function createOrderBook() {
-  const data = HTTP.call('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR').data;
+  const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,ETHEUR,ETHUSD').data;
 
   let testCases = [];
   for (let i = 0; i < NUM_OFFERS; i += 1) {
     testCases.push(
       {
-        sell_how_much: Helpers.createAtomizedPrices(data)[0] * (1 - (i * 0.1)),
+        //TODO fix btcs precision
+        sell_how_much: Helpers.createAtomizedPrices(data.result.XETHXXBT.c[0] * 100)[0] * (1 - (i * 0.1)),
         sell_which_token: bitcoinTokenContract.address,
         buy_how_much: 1 * SolKeywords.ether,
         buy_which_token: etherTokenContract.address,

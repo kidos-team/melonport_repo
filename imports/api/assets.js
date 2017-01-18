@@ -7,7 +7,7 @@ export const Assets = new Mongo.Collection('assets');
 if (Meteor.isServer) {
   // This code only runs on the server
   Meteor.publish('assets', () => {
-    return Assets.find({}, { sort: { createdAt: -1 } });
+    return Assets.find({}, { sort: { name: -1, createdAt: -1 } });
   });
 }
 
