@@ -1,9 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Session } from 'meteor/session';
-import { $ } from 'meteor/jquery';
-import { BigNumber } from 'web3';
 
 import { Assets } from '/imports/api/assets.js';
 
@@ -17,32 +13,33 @@ Template.oracle.onCreated(() => {
 
 
 Template.oracle.helpers({
-  'assets'() {
+  assets() {
     return Assets.find({}, { sort: { createdAt: -1 } });
   },
-  'formatPrice'() {
+  formatPrice() {
     const precision = this.precision;
-    const divisor = Math.pow(10, precision);
-    const price = this.priceFeed.price / divisor
+    const divisor = 10 ** precision;
+    const price = this.priceFeed.price / divisor;
     return price;
   },
-  getStatus(UNIX_timestamp) {
+  getStatus(unixTimestamp) {
     const now = new Date();
-    const now_seconds = now / 1000;
-    if (now_seconds - UNIX_timestamp > 5*60)
+    const nowSeconds = now / 1000;
+    if (nowSeconds - unixTimestamp > 5 * 60) {
       return 'Delayed';
+    }
     return 'Current';
   },
-  timeConverter(UNIX_timestamp) {
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  timeConverter(unixTimestamp) {
+    const a = new Date(unixTimestamp * 1000);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const year = a.getFullYear();
+    const month = months[a.getMonth()];
+    const date = a.getDate();
+    const hour = a.getHours();
+    const min = a.getMinutes();
+    const sec = a.getSeconds();
+    const time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
     return time;
   },
 });

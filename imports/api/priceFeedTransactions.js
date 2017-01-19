@@ -10,13 +10,3 @@ if (Meteor.isServer) {
     return PriceFeedTransactions.find({}, { sort: { createdAt: -1 } });
   });
 }
-
-Meteor.methods({
-  'priceFeedTransactions.insert'(address) {
-    check(address, String);
-    PriceFeedTransactions.insert({
-      address,
-      createdAt: new Date(),
-    });
-  },
-});
