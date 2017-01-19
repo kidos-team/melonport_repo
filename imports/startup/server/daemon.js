@@ -95,16 +95,15 @@ function createOrderBook() {
     (testCase, callbackMap) => {
       bitcoinTokenContract.approve(exchangeContract.address, testCase.sell_how_much, { from: OWNER })
         .then(() => bitcoinTokenContract.allowance(OWNER, exchangeContract.address))
-        .then((result) => {
-          return exchangeContract.offer(
+        .then(() => exchangeContract.offer(
           testCase.sell_how_much,
           testCase.sell_which_token,
           testCase.buy_how_much,
           testCase.buy_which_token,
-          { from: OWNER });
-        })
-        .then((txHash) => {
-          txHash = txHash;
+          { from: OWNER })
+        )
+        .then((result) => {
+          txHash = result;
           Object.assign({ txHash }, testCase);
           return exchangeContract.lastOfferId({ from: OWNER });
         })
@@ -125,22 +124,21 @@ function createOrderBook() {
     },
     (err, results) => {
       testCases = results;
-      done();
     },
   );
 }
 
 function deleteAllOrders() {
   exchangeContract.lastOfferId()
-  .then((result) => {
-    const numOrders = result.toNumber();
+  .then((res) => {
+    const numOrders = res.toNumber();
     for (let index = 0; index < numOrders; index += 1) {
       exchangeContract.offers(index)
-      .then((result) => {
+      .then((offers) => {
         // console.log(result)
-        const [sellHowMuch, sellWhichTokenAddress, buyHowMuch, buyWhichTokenAddress, owner, active] = result;
+        const [, , , , , active] = offers;
         let cancelTxHash;
-        if (active == true) {
+        if (active === true) {
           exchangeContract.cancel(index, { from: OWNER })
           .then((result) => {
             cancelTxHash = result;
@@ -155,19 +153,19 @@ function deleteAllOrders() {
             } });
           });
         }
-      })
+      });
     }
   });
 }
 
 function getEther() {
   HTTP.call('GET', 'http://faucet.ropsten.be:3001/donate/0xeaa1f63e60982c33868c8910EA4cd1cfB8eB9dcc');
-};
+}
 
 
 // EXECUTION
 Meteor.startup(() => {
-  setPrice()
+  setPrice();
   // Set Price in regular time intervals
   Meteor.setInterval(getEther, 2 * 60 * 1000);
   Meteor.setInterval(setPrice, 10 * 60 * 1000);

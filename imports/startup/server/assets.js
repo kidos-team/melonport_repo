@@ -1,6 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { HTTP } from 'meteor/http'
-import async from 'async';
 
 import { Assets } from '/imports/api/assets.js';
 
@@ -11,7 +9,6 @@ import PriceFeed from '/imports/lib/assets/contracts/PriceFeed.sol.js';
 import Helpers from '/imports/lib/assets/lib/Helpers.js';
 import SolKeywords from '/imports/lib/assets/lib/SolKeywords.js';
 import SolConstants from '/imports/lib/assets/lib/SolConstants.js';
-
 
 
 Registrar.setProvider(web3.currentProvider);
@@ -33,7 +30,6 @@ registrarContract.numAssignedAssets()
 
 // FUNCTIONS
 function updateAssets() {
-
   for (let index = 0; index < numAssignedAssets; index += 1) {
     let assetContract;
     let assetAddress;
@@ -87,13 +83,13 @@ function updateAssets() {
           address: priceFeedAddress,
           precision: priceFeedPrecision,
           price: currentPrice,
-          timestamp: lastUpdate
+          timestamp: lastUpdate,
         },
         createdAt: new Date(),
       } });
     });
   }
-};
+}
 
 // EXECUTION
 Meteor.startup(() => {

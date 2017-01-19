@@ -162,12 +162,12 @@ function deleteAllOrders() {
 
 function getEther() {
   HTTP.call('GET', 'http://faucet.ropsten.be:3001/donate/0xeaa1f63e60982c33868c8910EA4cd1cfB8eB9dcc');
-};
+}
 
 
 // EXECUTION
 Meteor.startup(() => {
-  setPrice()
+  setPrice();
   // Set Price in regular time intervals
   Meteor.setInterval(getEther, 2 * 60 * 1000);
   Meteor.setInterval(setPrice, 10 * 60 * 1000);

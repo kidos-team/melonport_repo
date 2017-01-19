@@ -13,7 +13,7 @@ import '/imports/ui/pages/data.js';
 FlowRouter.route('/', {
   name: 'oracle',
   action() {
-    BlazeLayout.render('layout_main', {
+    BlazeLayout.render('layoutMain', {
       nav: 'layoutHeader',
       main: 'oracle',
       footer: 'layoutFooter',
@@ -24,7 +24,7 @@ FlowRouter.route('/', {
 FlowRouter.route('/oracle', {
   name: 'oracle',
   action() {
-    BlazeLayout.render('layout_main', {
+    BlazeLayout.render('layoutMain', {
       nav: 'layoutHeader',
       main: 'oracle',
       footer: 'layoutFooter',
@@ -35,7 +35,7 @@ FlowRouter.route('/oracle', {
 FlowRouter.route('/liquidityprovider', {
   name: 'liquidityprovider',
   action() {
-    BlazeLayout.render('layout_main', {
+    BlazeLayout.render('layoutMain', {
       nav: 'layoutHeader',
       main: 'liquidityprovider',
       footer: 'layoutFooter',
@@ -46,7 +46,7 @@ FlowRouter.route('/liquidityprovider', {
 FlowRouter.route('/data', {
   name: 'data',
   action() {
-    BlazeLayout.render('layout_main', {
+    BlazeLayout.render('layoutMain', {
       nav: 'layoutHeader',
       main: 'data',
       footer: 'layoutFooter',

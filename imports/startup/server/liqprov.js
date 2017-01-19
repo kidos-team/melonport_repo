@@ -14,7 +14,7 @@ import Exchange from '/imports/lib/assets/contracts/Exchange.sol.js';
 
 import Helpers from '/imports/lib/assets/lib/Helpers.js';
 import SolKeywords from '/imports/lib/assets/lib/SolKeywords.js';
-import SolConstants from '/imports/lib/assets/lib/SolConstants.js';
+import { ether } from '/imports/lib/assets/lib/SolConstants.js';
 
 
 const TOKEN_ADDRESSES = [
@@ -42,20 +42,17 @@ function setPrice() {
   const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,ETHEUR,ETHUSD').data;
   const addresses = TOKEN_ADDRESSES;
   const inverseAtomizedPrices = Helpers.createInverseAtomizedPrices(
-   [
-     //TODO fix btcs precision
-     data.result.XETHXXBT.c[0] * 100,
-     data.result.XETHZUSD.c[0],
-     data.result.XETHZEUR.c[0]
-   ]);
+    [
+      //TODO fix btcs precision
+      data.result.XETHXXBT.c[0] * 100,
+      data.result.XETHZUSD.c[0],
+      data.result.XETHZEUR.c[0],
+    ]);
 
   const txHash = priceFeedContract.setPrice(addresses, inverseAtomizedPrices)
-  .then((result) => {
-    return priceFeedContract.lastUpdate();
-  })
+  .then(() => priceFeedContract.lastUpdate())
   .then((result) => {
     const lastUpdate = result.toNumber();
-
     PriceFeedTransactions.insert({
       addresses: TOKEN_ADDRESSES,
       BTC: data.result.XETHXXBT.c[0],
@@ -63,12 +60,11 @@ function setPrice() {
       EUR: data.result.XETHZEUR.c[0],
       inverseAtomizedPrices,
       txHash,
-      lastUpdate: lastUpdate,
+      lastUpdate,
       createdAt: new Date(),
     });
-    done();
   });
-};
+}
 
 function createOrderBook() {
   const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,ETHEUR,ETHUSD').data;
@@ -80,7 +76,7 @@ function createOrderBook() {
         //TODO fix btcs precision
         sell_how_much: Helpers.createAtomizedPrices(data.result.XETHXXBT.c[0] * 100)[0] * (1 - (i * 0.1)),
         sell_which_token: bitcoinTokenContract.address,
-        buy_how_much: 1 * SolKeywords.ether,
+        buy_how_much: 1 * ether,
         buy_which_token: etherTokenContract.address,
         id: i + 1,
         owner: OWNER,
@@ -95,16 +91,15 @@ function createOrderBook() {
     (testCase, callbackMap) => {
       bitcoinTokenContract.approve(exchangeContract.address, testCase.sell_how_much, { from: OWNER })
         .then(() => bitcoinTokenContract.allowance(OWNER, exchangeContract.address))
-        .then((result) => {
-          return exchangeContract.offer(
+        .then(() => exchangeContract.offer(
           testCase.sell_how_much,
           testCase.sell_which_token,
           testCase.buy_how_much,
           testCase.buy_which_token,
-          { from: OWNER });
-        })
-        .then((txHash) => {
-          txHash = txHash;
+          { from: OWNER }),
+        )
+        .then((result) => {
+          txHash = result;
           Object.assign({ txHash }, testCase);
           return exchangeContract.lastOfferId({ from: OWNER });
         })
@@ -125,7 +120,6 @@ function createOrderBook() {
     },
     (err, results) => {
       testCases = results;
-      done();
     },
   );
 }
@@ -155,19 +149,19 @@ function deleteAllOrders() {
             } });
           });
         }
-      })
+      });
     }
   });
 }
 
 function getEther() {
   HTTP.call('GET', 'http://faucet.ropsten.be:3001/donate/0xeaa1f63e60982c33868c8910EA4cd1cfB8eB9dcc');
-};
+}
 
 
 // EXECUTION
 Meteor.startup(() => {
-  setPrice()
+  setPrice();
   // Set Price in regular time intervals
   Meteor.setInterval(getEther, 2 * 60 * 1000);
   Meteor.setInterval(setPrice, 10 * 60 * 1000);
