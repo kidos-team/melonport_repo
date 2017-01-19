@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { HTTP } from 'meteor/http'
 import async from 'async';
 
 import { PriceFeedTransactions } from '/imports/api/priceFeedTransactions.js';
@@ -37,36 +36,8 @@ const bitcoinTokenContract = BitcoinToken.at(BitcoinToken.all_networks['3'].addr
 Exchange.setProvider(web3.currentProvider);
 const exchangeContract = Exchange.at(Exchange.all_networks['3'].address);
 
-// FUNCTIONS
-function setPrice() {
-  const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,ETHEUR,ETHUSD').data;
-  const addresses = TOKEN_ADDRESSES;
-  const inverseAtomizedPrices = Helpers.createInverseAtomizedPrices(
-    [
-      //TODO fix btcs precision
-      data.result.XETHXXBT.c[0] * 100,
-      data.result.XETHZUSD.c[0],
-      data.result.XETHZEUR.c[0],
-    ]);
 
-  const txHash = priceFeedContract.setPrice(addresses, inverseAtomizedPrices)
-  .then(() => priceFeedContract.lastUpdate())
-  .then((result) => {
-    const lastUpdate = result.toNumber();
-    PriceFeedTransactions.insert({
-      addresses: TOKEN_ADDRESSES,
-      BTC: data.result.XETHXXBT.c[0],
-      USD: data.result.XETHZUSD.c[0],
-      EUR: data.result.XETHZEUR.c[0],
-      inverseAtomizedPrices,
-      txHash,
-      lastUpdate,
-      createdAt: new Date(),
-    });
-  });
-}
-
-function createOrderBook() {
+export function createOrderBook() {
   const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,ETHEUR,ETHUSD').data;
 
   let testCases = [];
@@ -124,7 +95,7 @@ function createOrderBook() {
   );
 }
 
-function deleteAllOrders() {
+export function deleteAllOrders() {
   exchangeContract.lastOfferId()
   .then((result) => {
     const numOrders = result.toNumber();
@@ -153,19 +124,3 @@ function deleteAllOrders() {
     }
   });
 }
-
-function getEther() {
-  HTTP.call('GET', 'http://faucet.ropsten.be:3001/donate/0xeaa1f63e60982c33868c8910EA4cd1cfB8eB9dcc');
-}
-
-
-// EXECUTION
-Meteor.startup(() => {
-  setPrice();
-  // Set Price in regular time intervals
-  Meteor.setInterval(getEther, 2 * 60 * 1000);
-  Meteor.setInterval(setPrice, 10 * 60 * 1000);
-  //TODO first delete existing orders then create new ones
-  Meteor.setInterval(createOrderBook, 60 * 60 * 1000);
-  Meteor.setInterval(deleteAllOrders, 60 * 60 * 1000);
-});

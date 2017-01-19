@@ -1,15 +1,8 @@
-import { Meteor } from 'meteor/meteor';
-
 import { Assets } from '/imports/api/assets.js';
 
 import Registrar from '/imports/lib/assets/contracts/Registrar.sol.js';
 import PreminedAsset from '/imports/lib/assets/contracts/PreminedAsset.sol.js';
 import PriceFeed from '/imports/lib/assets/contracts/PriceFeed.sol.js';
-
-import Helpers from '/imports/lib/assets/lib/Helpers.js';
-import SolKeywords from '/imports/lib/assets/lib/SolKeywords.js';
-import SolConstants from '/imports/lib/assets/lib/SolConstants.js';
-
 
 Registrar.setProvider(web3.currentProvider);
 
@@ -22,14 +15,11 @@ registrarContract.numAssignedAssets()
   .then((result) => {
     numAssignedAssets = result.toNumber();
     // console.log(`\n Num to Registar assigned assets: ${numAssignedAssets}`)
-
-    // Inital updateAssets
-    updateAssets();
   });
 
 
 // FUNCTIONS
-function updateAssets() {
+export function updateAssets() {
   for (let index = 0; index < numAssignedAssets; index += 1) {
     let assetContract;
     let assetAddress;
@@ -90,10 +80,3 @@ function updateAssets() {
     });
   }
 }
-
-// EXECUTION
-Meteor.startup(() => {
-  // Set Price in regular time intervals
-  updateAssets();
-  Meteor.setInterval(updateAssets, 10 * 60 * 1000);
-});
