@@ -7,7 +7,7 @@ import { LiquidityProviderTransactions } from '/imports/api/liquidityProviderTra
 
 import EtherToken from '/imports/lib/assets/contracts/EtherToken.sol.js';
 import BitcoinToken from '/imports/lib/assets/contracts/BitcoinToken.sol.js';
-import DollarToken from '/imports/lib/assets/contracts/DollarToken.sol.js';
+import RepToken from '/imports/lib/assets/contracts/RepToken.sol.js';
 import EuroToken from '/imports/lib/assets/contracts/EuroToken.sol.js';
 import PriceFeed from '/imports/lib/assets/contracts/PriceFeed.sol.js';
 import Exchange from '/imports/lib/assets/contracts/Exchange.sol.js';
@@ -21,7 +21,7 @@ const priceFeedContract = PriceFeed.at(PriceFeed.all_networks['3'].address);
 
 const TOKEN_ADDRESSES = [
   BitcoinToken.all_networks['3'].address,
-  DollarToken.all_networks['3'].address,
+  RepToken.all_networks['3'].address,
   EuroToken.all_networks['3'].address,
 ];
 const OWNER = web3.eth.coinbase;
