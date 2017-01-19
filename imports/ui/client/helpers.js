@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 
 import EtherToken from '/imports/lib/assets/contracts/EtherToken.sol.js';
@@ -14,7 +15,7 @@ import Meta from '/imports/lib/assets/contracts/Meta.sol.js';
 Meteor.startup(() => {
   Session.set('isServerConnected', true);
   Meteor.call('isServerConnected', (err, result) => {
-    if(!err) {
+    if (!err) {
       Session.set('isServerConnected', result);
     } else {
       console.log(err);

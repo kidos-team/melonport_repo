@@ -39,7 +39,7 @@ Template.oracle.helpers({
     const hour = a.getHours();
     const min = a.getMinutes();
     const sec = a.getSeconds();
-    const time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+    const time = `${date} ${month} ${year} ${hour} ${min} ${sec}`;
     return time;
   },
 });
