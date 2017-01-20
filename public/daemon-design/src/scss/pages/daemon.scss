@@ -18,9 +18,6 @@
 		}
 	}
 }
-.mp-daemon-data{
-	padding: $spacing-lg * 2 $spacing-lg;
-}
 .daemon-title{
 	font-weight: $font-weight-regular;
 	font-size: $font-size-large + 1;
@@ -123,5 +120,81 @@
 	}
 }
 .mp-daemon{
+	.mp-daemon-data, .mp-daemon-portal{
+		padding: $spacing-lg * 2 $spacing-lg;
+	}
+}
 
+@media (max-width: $screen-xs-max){ 
+	.mp-daemon-hero{
+		height: 600px;
+		.hero-daemon-summary{
+			padding-top: $spacing-lg;
+		}
+	}
+	.mp-daemon{
+		.mp-daemon-data, .mp-daemon-portal{
+			padding: $spacing-md;
+		}
+	}
+	.daemon-title{
+		margin-bottom: $spacing-md;
+		margin-top: $spacing-md;
+	}
+	.mp-daemon-table{
+		&.mp-daemon-table-data, &.mp-daemon-table-portal{
+			thead{
+				tr{
+					background: $grey-nav;
+					th{
+						font-size: $font-size-small - 1;
+						&:first-child{
+							padding: 15px;
+						}
+					}
+				}
+			}
+			tbody{
+				tr{
+					td{
+						padding: 20px 15px;
+						font-size: $font-size-small - 1;
+						&.name{
+							p{
+								width: 35px;
+								font-size: $font-size-small - 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+@media (max-width: $screen-xs-max)
+and (orientation: portrait){ 
+
+}
+@media (max-width: $screen-xs-max)
+and (orientation: landscape){ 
+
+}
+@media (min-width: $screen-sm-min) 
+and (max-width: $screen-ipad)
+and (orientation: portrait){ 
+
+}
+
+@media (min-width: $screen-sm-min) 
+and (max-width: $screen-ipad)
+and (orientation: landscape){ 
+	.mp-daemon{
+		.mp-daemon-portal{
+			.mp-daemon-portal-container{
+				width: 100%;
+				margin-left: 0;
+			}
+		}
+	}
 }
