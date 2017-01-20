@@ -28,7 +28,7 @@ const OWNER = web3.eth.coinbase;
 
 // FUNCTIONS
 export function setPrice() {
-  const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,ETHEUR,ETHUSD').data;
+  const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,REPETH,ETHEUR').data;
   const addresses = TOKEN_ADDRESSES;
   const inverseAtomizedPrices = Helpers.createInverseAtomizedPrices(
     [

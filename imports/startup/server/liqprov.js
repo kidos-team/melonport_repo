@@ -38,7 +38,7 @@ const exchangeContract = Exchange.at(Exchange.all_networks['3'].address);
 
 
 export function createOrderBook() {
-  const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,ETHEUR,ETHUSD').data;
+  const data = HTTP.call('GET', 'https://api.kraken.com/0/public/Ticker?pair=ETHXBT,REPETH,ETHEUR').data;
 
   let testCases = [];
   for (let i = 0; i < NUM_OFFERS; i += 1) {
