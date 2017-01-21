@@ -54,13 +54,13 @@
 				<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 					<h2 class="daemon-title text-center">Price Information</h2>
 					<div class="table-responsive">
-						<table class="table table-bordered table-hover mp-daemon-table mp-daemon-table-data">
+						<table id="table-price" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-data" cellspacing="0" width="100%">
 							<thead>
 								<tr>
-									<th>Name <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-									<th>Last update at <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-									<th>Price <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-									<th>% Change (24h) <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
+									<th>Name</th>
+									<th>Last update at</th>
+									<th>Price</th>
+									<th>% Change (24h)</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -144,9 +144,16 @@
 
 	<script type="text/javascript" src="dist/scripts/scripts.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
+		$(document).ready(function() {
+			$('#table-price').DataTable({
+				"bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": false,
+				"bInfo": false,
+				"bAutoWidth": false
+			});
+		} );
 
-		});
 	</script>
 </body>
 </html>

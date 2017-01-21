@@ -18,6 +18,8 @@
     "font-awesome": "^4.5.0",
     "Ionicons": "ionicons#^2.0.1",
     "bootstrap-select-sass": "^1.6.3",
-    "owl.carousel": "^2.2.0"
+    "owl.carousel": "^2.2.0",
+    "datatables.net": "^2.1.1",
+    "datatables.net-bs": "^2.1.1"
   }
 }

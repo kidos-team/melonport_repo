@@ -109,6 +109,10 @@
 	thead{
 		th{
 			text-align: center;
+			&:after{
+				top: 15px;
+				bottom: 0;
+			}
 		}
 	}
 	tbody{

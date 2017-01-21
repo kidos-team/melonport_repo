@@ -69,12 +69,12 @@
 										<div class="row">
 											<div class="col-md-6">
 												<div class="table-responsive">
-													<table class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
+													<table id="table-order-eth" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal" cellspacing="0" width="100%">
 														<thead>
 															<tr>
-																<th>Cum. Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-																<th>Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-																<th>Price <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
+																<th>Cum. Vol.</th>
+																<th>Vol.</th>
+																<th>Price</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -109,12 +109,12 @@
 											</div>
 											<div class="col-md-6">
 												<div class="table-responsive">
-													<table class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
+													<table id="table-order-btc" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal" cellspacing="0" width="100%">
 														<thead>
 															<tr>
-																<th>Cum. Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-																<th>Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-																<th>Price <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
+																<th>Cum. Vol.</th>
+																<th>Vol.</th>
+																<th>Price</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -164,12 +164,12 @@
 										<div class="row">
 											<div class="col-md-6">
 												<div class="table-responsive">
-													<table class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
+													<table id="table-order-eth" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
 														<thead>
 															<tr>
-																<th>Cum. Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-																<th>Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-																<th>Price <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
+																<th>Cum. Vol.</th>
+																<th>Vol.</th>
+																<th>Price</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -204,12 +204,12 @@
 											</div>
 											<div class="col-md-6">
 												<div class="table-responsive">
-													<table class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
+													<table id="table-order-usd" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
 														<thead>
 															<tr>
-																<th>Cum. Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-																<th>Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-																<th>Price <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
+																<th>Cum. Vol.</th>
+																<th>Vol.</th>
+																<th>Price</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -258,12 +258,12 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="table-responsive">
-												<table class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
+												<table id="table-order-eth" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
 													<thead>
 														<tr>
-															<th>Cum. Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-															<th>Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-															<th>Price <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
+															<th>Cum. Vol.</th>
+															<th>Vol.</th>
+															<th>Price</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -298,12 +298,12 @@
 										</div>
 										<div class="col-md-6">
 											<div class="table-responsive">
-												<table class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
+												<table id="table-order-eur" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-portal">
 													<thead>
 														<tr>
-															<th>Cum. Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-															<th>Vol. <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
-															<th>Price <a href=""><i class="ion-android-arrow-dropup"></i></a></th>
+															<th>Cum. Vol.</th>
+															<th>Vol.</th>
+															<th>Price</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -377,7 +377,13 @@
 	<script type="text/javascript" src="dist/scripts/scripts.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-
+			$('#table-order-btc, #table-order-eth, #table-order-eur, #table-order-usd').DataTable({
+				"bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": false,
+				"bInfo": false,
+				"bAutoWidth": false
+			});
 		});
 	</script>
 </body>
