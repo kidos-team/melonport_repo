@@ -113,11 +113,22 @@ $fullwidth : 100%;
 				margin-top: 0;
 				li{
 					a{
+						display: inline-block;
 						padding: 22px 25px;
 						color: $text-grey;
 						font-weight: $font-weight-medium;
 						&:hover{
 							color: $white;
+						}
+					}
+					&.has-badge{
+						display: inline-block;
+						a{
+							padding-right: 5px;
+						}
+						.badge{
+							border-radius: 3px;
+							padding: 5px;
 						}
 					}
 					&.active{
@@ -126,7 +137,7 @@ $fullwidth : 100%;
 							background-color: #ffffff;
 						}
 					}
-					&.btn-request{
+					&.btn-request, &.btn-new{
 						padding: 13px 0 13px 25px;
 						a{
 							padding: 8px 20px;
@@ -177,50 +188,50 @@ $fullwidth : 100%;
 			margin-bottom: $spacing-lg;
 			color: $white;
 		}
-		.input-newsletter{
-			margin-top: $spacing-md + $spacing-sm;
-			input{
-				position: relative;
-				z-index: 1;
-				float: left;
-				width: 100%;
-				display: table-cell;
-				height: 60px;
-				border-color: $white;
+	}
+}
+.input-newsletter{
+	margin-top: $spacing-md + $spacing-sm;
+	input{
+		position: relative;
+		z-index: 1;
+		float: left;
+		width: 100%;
+		display: table-cell;
+		height: 60px;
+		border-color: $white;
+		color: $white;
+		border-right: 0;
+		font-size: $font-size-normal;
+		background: rgba(255,255,255,.1);
+		&:focus{
+			border-color: $white !important;
+		}
+	}
+	.input-group-link{
+		display: table-cell;
+		width: 1%;
+		margin-left: -1px;
+		border: 1px solid $white;
+		padding: 10px 15px 10px 10px;
+		border-top-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+		border-left: 0;
+		vertical-align: middle;
+		background: rgba(255,255,255,.1);
+		button{
+			background: none;
+			border: none;
+			i{
+				font-size: $font-size-medium;
 				color: $white;
-				border-right: 0;
-				font-size: $font-size-normal;
-				background: rgba(255,255,255,.1);
-				&:focus{
-					border-color: $white !important;
-				}
 			}
-			.input-group-link{
-				display: table-cell;
-				width: 1%;
-				margin-left: -1px;
-				border: 1px solid $white;
-				padding: 10px 15px 10px 10px;
-				border-top-right-radius: 4px;
-				border-bottom-right-radius: 4px;
-				border-left: 0;
-				vertical-align: middle;
-				background: rgba(255,255,255,.1);
-				button{
-					background: none;
-					border: none;
-					i{
-						font-size: $font-size-medium;
-						color: $white;
-					}
-					&:focus{
-						outline: none;
-					}
-					&:hover{
-						i{
-							color: darken($white, 15%);
-						}
-					}
+			&:focus{
+				outline: none;
+			}
+			&:hover{
+				i{
+					color: darken($white, 15%);
 				}
 			}
 		}
@@ -1932,3 +1943,4 @@ and (orientation: landscape){
 }
 
 @import "pages/daemon";
+@import "pages/portal_overview";
