@@ -47,6 +47,63 @@
 }
 .mp-portal{
 	padding: $spacing-lg;
+	&.setup-portfolio{
+		.setup-portfolio-wrapper{
+			border: 1px solid #e6e6e6;
+			padding: 30px;
+			.setup-header{
+				h4{
+					margin: 0;
+					font-weight: $font-weight-regular;
+					font-size: $font-size-medium + 2;
+					color: #4e4e4e;
+					margin-bottom: 5px;
+				}
+				p{
+					color: #868686;
+					font-size: $font-size-normal;
+					font-weight: $font-weight-regular;
+					margin-bottom: $spacing-md + $spacing-sm;
+				}
+			}
+			.setup-form{
+				padding: 20px 0 5px;
+			}
+			.line-divider{
+				border-bottom: 1px solid #e6e6e6;
+				margin: 10px 0;
+			}
+			.setup-module{
+				border: 1px solid #e6e6e6;
+				padding: $spacing-md;
+				margin: 20px 0;
+				p{
+					color: #868686;
+					font-weight: $font-weight-regular;
+					font-size: $font-size-normal - 1;
+				}
+				ul{
+					li{
+						margin-bottom: $spacing-sm;
+						&:before{
+							content: "-";
+							margin-right: $spacing-sm;
+							color: $light-blue;
+						}
+						a{
+							color: $light-blue;
+							font-size: $font-size-normal - 1;
+							font-weight: $font-weight-medium;
+						}
+					}
+				}
+			}
+			.btn-portfolio{
+				text-align: right;
+				margin-top: $spacing-md;
+			}
+		}
+	}
 	.mp-portal-table{
 		margin-bottom: 0 !important;
 		thead{
