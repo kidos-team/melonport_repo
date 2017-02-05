@@ -1,0 +1,163 @@
+.select-form{
+	border-radius: 0 !important;
+	height: 50px;
+	box-shadow: none;
+	-webkit-appearance: none;
+}
+.custom-switch{
+	.bootstrap-switch{
+		border-radius: 0;
+		.bootstrap-switch-container{
+			.bootstrap-switch-primary{
+				color: $white !important;
+				border-radius: 0;
+				background: $light-blue;
+				border-color: $light-blue;
+			}
+			.bootstrap-switch-primary, .bootstrap-switch-default{
+				vertical-align: top;
+				height: 44px;
+				padding-top: 12px !important;
+			}
+		}
+	}
+}
+// metricsgraphic custom chart
+.mg-x-axis text,
+.mg-y-axis text,
+.mg-histogram .axis text {
+	fill: #fff;
+}
+text {
+	fill: #fff;
+}
+li {
+	color: #cfcfcf;
+}
+// title
+.exchange-title{
+	color: $par-grey;
+	font-size: $font-size-medium + 2;
+	font-weight: $font-weight-regular;
+	display: inline-block;
+	margin: 0;
+	vertical-align: middle;
+	line-height: 1;
+}
+.mp-portal{
+	&.portal-exchange{
+		.mp-exchange-table{
+			margin-bottom: 0 !important;
+			&.order-book{
+				thead{
+					tr{
+						th{
+							width: 33%;
+						}
+					}
+				}
+			}
+			thead{
+				tr{
+					background: #f6f6f6;
+					th{
+						text-align: left;
+						padding: 15px 15px 15px 50px;
+						&::after{
+							vertical-align: middle;
+							top: 30px;
+							right: 30px;
+						}
+					}
+				}
+			}
+			tbody{
+				tr{
+					td{
+						padding: 15px 15px 15px 50px;
+						text-align: left;
+						p{
+							&.green, &.red, &.blue{
+								font-weight: $font-weight-medium;
+							}
+						}
+					}
+				}
+			}
+		}
+		.exchange-overview{
+			margin-bottom: $spacing-lg;
+			&.wallet{
+				.asset-overview-wrapper{
+					min-height: 410px !important;
+				}
+			}
+			.asset-overview-wrapper{
+				min-height: 555px;
+				border: 1px solid #dddddd;
+				padding: 30px $spacing-lg;
+				.exchange-overview-header{
+					margin-bottom: $spacing-lg;
+					&.asset{
+						margin-bottom: $spacing-md;
+						.line-divider{
+							margin: 30px 0 10px;
+						}
+					}
+					.badge{
+						float: right;
+						border-radius: 2px;
+					}
+				}
+				.exchange-overview-block{
+					.mp-form{
+						.line-divider{
+							margin: 30px 0;
+						}
+						.form-group{
+							width: 100%;
+							margin-bottom: $spacing-md;
+							input{
+							}
+							label, span, p{
+								padding-top: 15px;
+							}
+							label{
+								font-size: $font-size-normal;
+								font-weight: $font-weight-medium;
+								text-align: left;
+							}
+							span, p{
+								font-size: $font-size-normal;
+								font-weight: $font-weight-regular;
+								color: $par-grey;
+							}
+							p{
+								text-align: right;
+								margin-bottom: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+		.exchange-order{
+			margin-bottom: $spacing-lg;
+			.exchange-order-wrapper{
+				border: 1px solid #dddddd;
+				border-bottom: 0;
+				.order-book-head{
+					padding: 30px;
+				}
+				.order-book-table{
+
+				}
+				.order-book-more{
+					.table-load-more{
+						border-top: 0;
+					}
+				}
+			}
+		}
+	}
+}

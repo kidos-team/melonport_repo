@@ -5,6 +5,25 @@
 @import "partials/base";
 
 $fullwidth : 100%;
+.line-divider{
+	border-bottom: 1px solid #e6e6e6;
+	margin: 10px 0;
+}
+.fl-right{
+	float: right;
+}
+.text-right{
+	text-align: right !important;
+}
+.mt-20{
+	margin-top: 20px;
+}
+.blue{
+	color: $light-blue !important;
+}
+.green{
+	color: $light-green !important;
+}
 .mp-hero{
 	background: url('../img/bgr_hero.png');
 	background-repeat: no-repeat;
@@ -27,6 +46,30 @@ $fullwidth : 100%;
 		padding-top: 120px;
 	}
 }
+table.dataTable thead th {
+    position: relative;
+    background-image: none !important;
+}
+ 
+table.dataTable thead th.sorting:after,
+table.dataTable thead th.sorting_asc:after,
+table.dataTable thead th.sorting_desc:after {
+    position: absolute;
+    display: block;
+    font-family: FontAwesome;
+}
+table.dataTable thead th.sorting:after {
+    content: "\f0dc";
+    font-size: 0.8em;
+    padding-top: 0.12em;
+}
+table.dataTable thead th.sorting_asc:after {
+    content: "\f0de";
+}
+table.dataTable thead th.sorting_desc:after {
+    content: "\f0dd";
+}
+
 
 // global
 .main-title{
@@ -948,7 +991,6 @@ $fullwidth : 100%;
 		}
 	}
 }
-
 
 // Learn page
 .mp-learn-hero{
@@ -1944,3 +1986,4 @@ and (orientation: landscape){
 
 @import "pages/daemon";
 @import "pages/portal_overview";
+@import "pages/portal_exchange";

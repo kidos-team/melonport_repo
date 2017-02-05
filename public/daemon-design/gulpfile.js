@@ -116,7 +116,7 @@ gulp.task('clean', function(){
 
 gulp.task('default', ['browser-sync'], function(){
     gulp.watch(CssFiles,['styles']);
-    gulp.watch(['*.html'], ['bs-reload']);
+    gulp.watch(['*.html, **/*.html'], ['bs-reload']);
 });
 
 gulp.task('build', ['clean'], function(){

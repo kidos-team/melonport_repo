@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Landing Page</title>
+
+	<link href="../dist/css/style.min.css" rel="stylesheet">
+	<link href="../dist/css/custom.min.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-default nav-header nav-portal">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#default-header" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><img src="../dist/img/logo.png"></a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="default-header">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Wallet</a></li>
+					<li class="has-badge">
+						<a href="#">Peter</a>
+						<span class="badge btn-outline-green">New</span>
+					</li>
+					<li class="btn-request"><a href="#" class="btn outline-white">Manage</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- hero section -->
+	<section class="mp-hero mp-portal-hero">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 col-sm-7 col-xs-12 text-center hero-text">
+					<div id="charts"></div>
+				</div>
+				<div class="col-md-5 col-sm-5 col-xs-12 hero-summary">
+					<div class="row">
+						<div class="hero-network-summary col-md-6">
+							<span>Melon Summary</span>
+							<ul>
+								<li>
+									<p class="status">Status:</p>
+									<p class="value">Connected</p>
+								</li>
+								<li>
+									<p class="status">Current Block:</p>
+									<p class="value">177624</p>
+								</li>
+								<li>
+									<p class="status">Transaction:</p>
+									<p class="value">none</p>
+								</li>
+							</ul>
+						</div>
+						<div class="hero-network-summary col-md-6">
+							<span>Executive Summary</span>
+							<ul>
+								<li>
+									<p class="status">Wallet Balance:</p>
+									<p class="value">35.896 EUR</p>
+								</li>
+								<li>
+									<p class="status">Portfolio:</p>
+									<p class="value">Peter</p>
+								</li>
+								<li>
+									<p class="status">Delta:</p>
+									<p class="value">±0.0</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="mp-portal portal-exchange">
+		<!-- exchange page -->
+		<div class="container">
+			<div class="row exchange-overview">
+				<div class="col-md-6 asset-overview">
+					<div class="asset-overview-wrapper">
+						<div class="exchange-overview-header asset">
+							<h2 class="exchange-title">Asset Overview</h2>
+							<span class="badge btn-outline-green">+ 2.09%</span>
+							<div class="line-divider"></div>
+						</div>
+						<div class="exchange-overview-block">
+							<div class="form-horizontal mp-form">
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="from_portofolio">From Portofolio</label>
+									<div class="col-md-8 text-right">
+										<div class="make-switch custom-switch">
+											<input type="checkbox" name="my-checkbox" checked>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">Name</label>
+									<div class="col-md-8">
+										<p>Melon Capital</p>
+									</div>
+								</div>
+								<div class="line-divider"></div>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="volume">Asset Pair</label>
+									<div class="col-md-8">
+										<select class="form-control select-form">
+											<option>ETH/BTC</option>
+											<option>ETH</option>
+											<option>BTC</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">Asset Holdings:</label>
+									<div class="col-md-8">
+										<p>24.8 EUR</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">% Portfolio:</label>
+									<div class="col-md-8">
+										<p>49.8%</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">Asset Price:</label>
+									<div class="col-md-8">
+										<p>84.35 ETH/BTC</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 asset-overview">
+					<div class="asset-overview-wrapper">
+						<div class="exchange-overview-header">
+							<h2 class="exchange-title">Manage Holdings</h2>
+							<span class="badge btn-outline-blue">48%</span>
+						</div>
+						<div class="exchange-overview-block">
+							<div class="form-horizontal mp-form">
+								<div class="form-group">
+									<label class="col-md-2 control-label" for="type_buy">Type</label>
+									<div class="col-md-8">
+										<select class="form-control select-form">
+											<option>Buy</option>
+											<option>Sell</option>
+										</select>
+									</div>
+									<span class="col-md-2">Order</span>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label" for="price">Price</label>
+									<div class="col-md-8">
+										<input type="text" id="price" class="form-control" placeholder="">
+									</div>
+									<span class="col-md-2">ETH/BTC</span>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label" for="volume">Volume</label>
+									<div class="col-md-8">
+										<input type="text" id="volume" class="form-control" placeholder="">
+									</div>
+									<span class="col-md-2">BTC</span>
+								</div>
+								<div class="line-divider"></div>
+								<div class="form-group">
+									<label class="col-md-2 control-label" for="total">Total</label>
+									<div class="col-md-8">
+										<input type="text" id="total" class="form-control" placeholder="">
+									</div>
+									<span class="col-md-2">ETH</span>
+								</div>
+								<div class="form-group">
+									<a href="#" class="fl-right btn btn-light-blue mt-20">Buy</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row exchange-order">
+				<div class="col-md-12">
+					<div class="exchange-order-wrapper">
+						<div class="row order-book-head">
+							<div class="col-md-12">
+								<h2 class="exchange-title">Order Book</h2>
+							</div>
+						</div>
+						<div class="row order-book-table">
+							<div class="col-md-6">
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover mp-daemon-table mp-daemon-table-data mp-exchange-table order-book" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Cum. Vol. <p>(BTC)</p></th>
+												<th>Vol <p>(BTC)</p></th>
+												<th>Buy Price <p>(ETH/BTC)</p></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>				
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover mp-daemon-table mp-daemon-table-data mp-exchange-table order-book" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Sell Price <p>(ETC/BTC)</p></th>
+												<th>Vol <p>(BTC)</p></th>
+												<th>Buy Price <p>(BTC)</p></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>				
+											<tr>
+												<td>100</td>
+												<td>100</td>
+												<td>0.523244</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row order-book-more">
+							<div class="col-md-12">
+								<div class="table-load-more">
+									<a href="" class="btn btn-normal btn-outline-blue">Load More</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row exchange-order">
+				<div class="col-md-12">
+					<div class="exchange-order-wrapper">
+						<div class="row order-book-head">
+							<div class="col-md-12">
+								<h2 class="exchange-title">Open Order</h2>
+							</div>
+						</div>
+						<div class="row order-book-table">
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table id="table-open-orders" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-data mp-exchange-table" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Time <p>(BTC)</p></th>
+												<th>Type <p>(BTC)</p></th>
+												<th>Buy Price <p>(ETH/BTC)</p></th>
+												<th>Vol<p>(BTC)</p></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>21.01-20:49:26</td>
+												<td><p class="red">Sell</p></td>
+												<td>872.19 EUR</td>
+												<td>100</td>
+											</tr>
+											<tr>
+												<td>21.01-20:49:26</td>
+												<td><p class="green">Buy</p></td>
+												<td>872.19 EUR</td>
+												<td>100</td>
+											</tr>
+											<tr>
+												<td>21.01-20:49:26</td>
+												<td><p class="green">Buy</p></td>
+												<td>872.19 EUR</td>
+												<td>100</td>
+											</tr>
+											<tr>
+												<td>21.01-20:49:26</td>
+												<td><p class="red">Sell</p></td>
+												<td>872.19 EUR</td>
+												<td>100</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row order-book-more">
+							<div class="col-md-12">
+								<div class="table-load-more">
+									<a href="" class="btn btn-normal btn-outline-blue">Load More</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row exchange-order">
+				<div class="col-md-12">
+					<div class="exchange-order-wrapper">
+						<div class="row order-book-head">
+							<div class="col-md-12">
+								<h2 class="exchange-title">Recent Order</h2>
+							</div>
+						</div>
+						<div class="row order-book-table">
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table id="table-recent-orders" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-data mp-exchange-table" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Time <p>(BTC)</p></th>
+												<th>Type <p>(BTC)</p></th>
+												<th>Buy Price <p>(ETH/BTC)</p></th>
+												<th>Vol<p>(BTC)</p></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>21.01-20:49:26</td>
+												<td><p class="red">Sell</p></td>
+												<td>872.19 EUR</td>
+												<td>100</td>
+											</tr>
+											<tr>
+												<td>21.01-20:49:26</td>
+												<td><p class="green">Buy</p></td>
+												<td>872.19 EUR</td>
+												<td>100</td>
+											</tr>
+											<tr>
+												<td>21.01-20:49:26</td>
+												<td><p class="green">Buy</p></td>
+												<td>872.19 EUR</td>
+												<td>100</td>
+											</tr>
+											<tr>
+												<td>21.01-20:49:26</td>
+												<td><p class="red">Sell</p></td>
+												<td>872.19 EUR</td>
+												<td>100</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row order-book-more">
+							<div class="col-md-12">
+								<div class="table-load-more">
+									<a href="" class="btn btn-normal btn-outline-blue">Load More</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- footer section -->
+	<footer class="mp-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-3 col-xs-12 footer-logo">
+					<img src="../dist/img/logo.png">
+					<p>Copyright  © 2016. All Right Reserved</p>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12 footer-link">
+					<ul>
+						<li><a href="#">Daemon</a></li>
+						<li><a href="#">Portal</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-12 footer-icon">
+					<a href="#" class="btn btn-big btn-outline-white">Send Feedback</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script type="text/javascript" src="../dist/scripts/scripts.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("[name='my-checkbox']").bootstrapSwitch({
+				onText: 'Yes', 
+				offText: 'No'
+			});
+			$('#table-open-orders').DataTable({
+				"bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": false,
+				"bInfo": false,
+				"bAutoWidth": false
+			});
+			$('#table-recent-orders').DataTable({
+				"bPaginate": false,
+				"bLengthChange": false,
+				"bFilter": false,
+				"bInfo": false,
+				"bAutoWidth": false
+			});
+			d3.json('../data/fake_users1.json', function(data) {
+				data = MG.convert.date(data, 'date');
+				MG.data_graphic({
+					title: "",
+					description: "For single line charts, there are two simple ways to change a line color. The first is to change the css (described on the wiki). The other is to specify a color value using color: string or colors: string.",
+					data: data,
+					width: 600,
+					height: 200,
+					right: 40,
+					color: '#1189c6',
+					target: '#charts',
+					x_accessor: 'date',
+					y_accessor: 'value'
+				});
+			});
+		});
+	</script>
+</body>
+</html>

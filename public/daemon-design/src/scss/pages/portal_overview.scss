@@ -108,10 +108,12 @@
 		margin-bottom: 0 !important;
 		thead{
 			tr{
+				background: #f6f6f6;
 				th{
 					&::after{
 						vertical-align: middle;
 						top: 30px;
+						right: 30px;
 					}
 				}
 			}

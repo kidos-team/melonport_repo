@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>Landing Page</title>
 
-	<link href="dist/css/style.min.css" rel="stylesheet">
-	<link href="dist/css/custom.min.css" rel="stylesheet">
+	<link href="../dist/css/style.min.css" rel="stylesheet">
+	<link href="../dist/css/custom.min.css" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-default nav-header nav-portal">
@@ -19,7 +19,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><img src="dist/img/logo.png"></a>
+				<a class="navbar-brand" href="#"><img src="../dist/img/logo.png"></a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="default-header">
@@ -40,8 +40,15 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7 col-sm-7 col-xs-12 text-center hero-text">
-					<h1>You are good to go!</h1>
-					<p>Explore the future of finance with Melon</p>
+					<h1>The future of finance with Melon</h1>
+					<form>
+						<div class="input-group input-newsletter">
+							<input type="text" value="" class="form-control" placeholder="Search for Managers and Portfolios" required>
+							<span class="input-group-link">
+								<button type="submit" value="Subscribe" name="subscribe" class="button"><i class="ion-ios-search-strong"></i></button>
+							</span>
+						</div>
+					</form>
 				</div>
 				<div class="col-md-5 col-sm-5 col-xs-12 hero-summary">
 					<div class="row">
@@ -85,82 +92,55 @@
 		</div>
 	</section>
 
-	<section class="mp-portal setup-portfolio">
+	<section class="mp-portal">
 		<!-- term&condition -->
 		<div class="container">
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1 setup-portfolio-wrapper">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="setup-header">
-								<h4>Setup a new portfolio</h4>
-								<p>Create a new portfolio and deploy it to the Ethereum Blockchain.</p>
-							</div>
-						</div>
-					</div>
-					<div class="line-divider"></div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="setup-form">
-								<form class="mp-form">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Your Name (Visible to others)">
-									</div>
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Portfolio Name (Visible to others)">
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="line-divider"></div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="setup-module">
-								<p>Asset Class Module:</p>
-								<ul class="setup-module-list">
-									<li><a href="#" class="">Ether Token (ETH-T)</a></li>
-									<li><a href="#" class="">Bitcoin Token (BTC-T)</a></li>
-									<li><a href="#" class="">Rep Token (Rep)</a></li>
-									<li><a href="#" class="">Euro Token (EUR-T)</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="setup-module">
-								<p>Exchange Module:</p>
-								<ul class="setup-module-list">
-									<li><a href="#" class="">Melon Exchange</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="setup-module">
-								<p>Price Feed Module:</p>
-								<ul class="setup-module-list">
-									<li><a href="#" class="">Melon Price Feed</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="line-divider"></div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="setup-module">
-								<p>Registrar Module:</p>
-								<ul class="setup-module-list">
-									<li><a href="#" class="">Melon Registrar</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 btn-portfolio">
-							<a href="#" class="btn btn-light-blue">Create New Portfolio</a>
+				<div class="col-md-10 col-md-offset-1">
+					<div class="table-responsive">
+						<table id="table-portal-overview" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-data mp-portal-table" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>Manager <p>(Identicon)</p></th>
+									<th>Portfolio <p>(Name)</p></th>
+									<th>AUM <p>(EUR)</p></th>
+									<th>Share Price <p>(Finney)</p></th>
+									<th>Change 24h <p>(%)</p></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="identicon"><img src="../dist/img/identicon/icon1.png"></td>
+									<td class="portfolio"><a href="#" class="btn btn-small btn-outline-blue">Drago</a></td>
+									<td>4.42</td>
+									<td>1,000.0</td>
+									<td class="green">+2.12%</td>
+								</tr>
+								<tr>
+									<td class="identicon"><img src="../dist/img/identicon/icon2.png"></td>
+									<td class="portfolio"><a href="#" class="btn btn-small btn-outline-blue">melon capital</a></td>
+									<td>1.42</td>
+									<td>2,000.0</td>
+									<td class="red">+7.12%</td>
+								</tr>
+								<tr>
+									<td class="identicon"><img src="../dist/img/identicon/icon1.png"></td>
+									<td class="portfolio"><a href="#" class="btn btn-small btn-outline-blue">melon capital</a></td>
+									<td>3.42</td>
+									<td>1,000.0</td>
+									<td class="red">+2.15%</td>
+								</tr>
+								<tr>
+									<td class="identicon"><img src="../dist/img/identicon/icon1.png"></td>
+									<td class="portfolio"><a href="#" class="btn btn-small btn-outline-blue">alg fund</a></td>
+									<td>1.42</td>
+									<td>1,000.0</td>
+									<td class="green">+1.12%</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="table-load-more">
+							<a href="" class="btn btn-normal btn-outline-blue">Load More</a>
 						</div>
 					</div>
 				</div>
@@ -173,7 +153,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-12 footer-logo">
-					<img src="dist/img/logo.png">
+					<img src="../dist/img/logo.png">
 					<p>Copyright  © 2016. All Right Reserved</p>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-12 footer-link">
@@ -189,7 +169,7 @@
 		</div>
 	</footer>
 
-	<script type="text/javascript" src="dist/scripts/scripts.min.js"></script>
+	<script type="text/javascript" src="../dist/scripts/scripts.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('#table-portal-overview').DataTable({
@@ -197,7 +177,7 @@
 				"bLengthChange": false,
 				"bFilter": false,
 				"bInfo": false,
-				"bAutoWidth": false
+				"bAutoWidth": false,
 			});
 		});
 	</script>
