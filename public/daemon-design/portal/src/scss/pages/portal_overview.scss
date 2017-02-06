@@ -2,6 +2,9 @@
 	height: 400px;
 	.hero-text{
 		padding-top: 120px;
+		&.hero-charts{
+			padding-top: 90px !important;
+		}
 		h1{
 		}
 		form{

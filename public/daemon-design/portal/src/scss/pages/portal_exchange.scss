@@ -43,8 +43,8 @@ li {
 	color: #cfcfcf;
 }
 .mg-active-datapoint {
-    fill: #fff;
-    font-size: 11.5px;
+	fill: #fff;
+	font-size: 11.5px;
 }
 // title
 .exchange-title{
@@ -163,7 +163,14 @@ li {
 					padding: 30px;
 				}
 				.order-book-table{
-
+					.col-md-6{
+						&:first-child{
+							padding-right: 0;
+						}
+						&:last-child{
+							padding-left: 0;
+						}
+					}
 				}
 				.order-book-more{
 					.table-load-more{
