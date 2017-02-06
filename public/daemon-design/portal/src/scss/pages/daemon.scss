@@ -1,0 +1,207 @@
+.mp-daemon-hero{
+	height: 380px;
+	.hero-text{
+		padding-top: $spacing-lg * 3;
+	}
+	.hero-daemon-summary{
+		padding-top: $spacing-lg * 2;
+		ul{
+			padding: $spacing-md $spacing-lg;
+			background: rgba($white, .1);
+			border: 1px solid $white;
+			li{
+				margin-bottom: $spacing-md - 5;
+				&:last-child{
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}
+.daemon-title{
+	font-weight: $font-weight-regular;
+	font-size: $font-size-large + 1;
+	margin-bottom: $spacing-lg;
+	margin-top: 0;
+}
+.mp-daemon-table{
+	&.mp-daemon-table-data, &.mp-daemon-table-portal{
+		thead{
+			tr{
+				background: $grey-nav;
+				th{
+					color: $par-grey;
+					font-size: $font-size-normal;
+					font-weight: $font-weight-medium;
+					padding: 15px;
+					border: 0;
+					a{
+						i{
+							color: $par-grey;
+							font-size: $font-size-normal;
+							margin-left: 5px;
+						}
+					}
+				}
+			}
+		}
+		tbody{
+			tr{
+				.red{
+					color: $red;
+				}
+				.green{
+					color: $light-green;
+				}
+				.blue{
+					color: $light-blue;
+				}
+				td{
+					border: 0;
+					border-bottom: 1px solid #dddddd;
+					padding: 20px;
+					font-size: $font-size-normal - 1;
+					p{
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+	}
+}
+.mp-daemon-table-data{
+	thead{
+		tr{
+			th{
+				&:first-child{
+					width: 20%;
+					padding: 15px 30px;
+				}
+				&:last-child{
+					text-align: center;
+				}
+			}
+		}
+	}
+	tbody{
+		tr{
+			td{
+				&:first-child{
+					width: 20%;
+					padding: 20px 30px;
+				}
+				&:last-child{
+					text-align: center;
+				}
+				&.name{
+					p{
+						display: inline-block;
+						width: 40px;
+						font-size: $font-size-normal - 1;
+						font-weight: $font-weight-medium;
+					}
+					span{
+						display: inline-block;
+					}
+				}
+			}
+		}
+	}
+}
+.mp-daemon-table-portal{
+	thead{
+		th{
+			text-align: center;
+			&:after{
+				top: 15px;
+				bottom: 0;
+			}
+		}
+	}
+	tbody{
+		tr{
+			td{
+				text-align: center;
+			}
+		}
+	}
+}
+.mp-daemon{
+	.mp-daemon-data, .mp-daemon-portal{
+		padding: $spacing-lg * 2 $spacing-lg;
+	}
+}
+
+@media (max-width: $screen-xs-max){ 
+	.mp-daemon-hero{
+		height: 600px;
+		.hero-daemon-summary{
+			padding-top: $spacing-lg;
+		}
+	}
+	.mp-daemon{
+		.mp-daemon-data, .mp-daemon-portal{
+			padding: $spacing-md;
+		}
+	}
+	.daemon-title{
+		margin-bottom: $spacing-md;
+		margin-top: $spacing-md;
+	}
+	.mp-daemon-table{
+		&.mp-daemon-table-data, &.mp-daemon-table-portal{
+			thead{
+				tr{
+					background: $grey-nav;
+					th{
+						font-size: $font-size-small - 1;
+						&:first-child{
+							padding: 15px;
+						}
+					}
+				}
+			}
+			tbody{
+				tr{
+					td{
+						padding: 20px 15px;
+						font-size: $font-size-small - 1;
+						&.name{
+							p{
+								width: 35px;
+								font-size: $font-size-small - 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+@media (max-width: $screen-xs-max)
+and (orientation: portrait){ 
+
+}
+@media (max-width: $screen-xs-max)
+and (orientation: landscape){ 
+
+}
+@media (min-width: $screen-sm-min) 
+and (max-width: $screen-ipad)
+and (orientation: portrait){ 
+
+}
+
+@media (min-width: $screen-sm-min) 
+and (max-width: $screen-ipad)
+and (orientation: landscape){ 
+	.mp-daemon{
+		.mp-daemon-portal{
+			.mp-daemon-portal-container{
+				width: 100%;
+				margin-left: 0;
+			}
+		}
+	}
+}
